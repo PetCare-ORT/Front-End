@@ -1,9 +1,17 @@
 import React from "react";
-
-export default function diary() {
+import { View, Text, StyleSheet } from "react-native";
+export default function Diary() {
   return (
     <View style={styles.container}>
-      <Text>entradas diario</Text>
+      <Text>Diary</Text>
     </View>
   );
 }
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});

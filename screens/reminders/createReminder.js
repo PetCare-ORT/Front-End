@@ -1,8 +1,8 @@
 import React from "react";
-
-export default function createReminder() {
+import { View, Text } from "react-native";
+export default function CreateReminder() {
   return (
-    <View style={styles.container}>
+    <View>
       <Text>Create Reminder screen</Text>
     </View>
   );

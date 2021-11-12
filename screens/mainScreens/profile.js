@@ -1,8 +1,8 @@
 import React from "react";
-
-export default function profile() {
+import { View, Text } from "react-native";
+export default function Profile() {
   return (
-    <View style={styles.container}>
+    <View>
       <Text>Profile screen</Text>
     </View>
   );

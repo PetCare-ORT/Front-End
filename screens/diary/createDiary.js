@@ -1,8 +1,9 @@
 import React from "react";
+import { View, Text } from "react-native";
 
-export default function createDiary() {
+export default function CreateDiary() {
   return (
-    <View style={styles.container}>
+    <View>
       <Text>Entrada de diario screen</Text>
     </View>
   );
