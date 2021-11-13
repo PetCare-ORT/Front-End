@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+
 export default function Pets() {
   return (
     <View style={styles.container}>
@@ -13,5 +14,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  button: {
+    justifyContent: "flex-end",
   },
 });

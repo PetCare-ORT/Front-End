@@ -1,6 +1,5 @@
 import React from "react";
 import Constants from "../../lib/Constants";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Pets from "../Pet/Pets.js";
@@ -8,10 +7,9 @@ import Diary from "../Diary/Diary.js";
 import Calendar from "../Calendar/Calendar.js";
 import Reminders from "../Reminders/Reminders.js";
 
-const Tab = createBottomTabNavigator();
 const MaterialTab = createMaterialBottomTabNavigator();
 
-export default function Main({ navigation }) {
+export default function Main() {
   return (
     <MaterialTab.Navigator
       activeColor="#f0edf6"
