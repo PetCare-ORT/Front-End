@@ -5,9 +5,9 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { MenuContext } from "react-native-popup-menu";
 
 import Constants from "./lib/Constants.js";
-import LoginScreen from "./Screens/Login/LoginScreen.js";
-import Main from "./Screens/MainScreens/Main.js";
-import DropdownMenu from "./Screens/DropdownMenu/DropdownMenu.js";
+import LoginScreen from "./screens/Login/LoginScreen.js";
+import Main from "./screens/mainScreens/main.js";
+import DropdownMenu from "./screens/DropdownMenu/DropdownMenu.js";
 
 const Stack = createNativeStackNavigator();
 
