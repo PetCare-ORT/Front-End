@@ -1,8 +1,8 @@
 import React from "react";
-
-export default function createPet() {
+import { View, Text } from "react-native";
+export default function CreatePet() {
   return (
-    <View style={styles.container}>
+    <View>
       <Text>Create Pet screen</Text>
     </View>
   );
