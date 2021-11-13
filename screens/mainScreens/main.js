@@ -19,6 +19,7 @@ export default function Main() {
       <MaterialTab.Screen
         name={Constants.PETS_VIEW}
         component={Pets}
+        initialParams={{ petId: "6186a3926791ce99c2915a41" }}
         options={{
           tabBarLabel: "Pets",
           tabBarIcon: ({ color }) => (

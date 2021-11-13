@@ -1,13 +1,43 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Text, StyleSheet, FlatList } from "react-native";
+import { ActivityIndicator } from "react-native-paper";
+import petsMock from "../../mock/petsMock.js";
+import PetThumbnail from "./PetThumbnail.js";
 
-export default function Pets() {
+export default function Pets({ route }) {
+  const [isLoading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
+
+  const getPets = () => {
+    const petId = route.params.petId;
+    const pet = petsMock.filter((pet) => {
+      return pet._id == petId;
+    });
+    setData(petsMock);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    getPets();
+  }, []);
+
   return (
     <View style={styles.container}>
       <Text>Pets</Text>
+      {isLoading ? (
+        <ActivityIndicator />
+      ) : (
+        <FlatList
+          data={data}
+          numColumns={2}
+          keyExtractor={(item, index) => "key" + index}
+          renderItem={({ item }) => <PetThumbnail petData={item} />}
+        />
+      )}
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
