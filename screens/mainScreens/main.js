@@ -1,11 +1,11 @@
 import React from "react";
-import Constants from "../../lib/Constants";
+import Constants from "../../lib/constants";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import Pets from "../Pet/Pets.js";
-import Diary from "../Diary/Diary.js";
-import Calendar from "../Calendar/Calendar.js";
-import Reminders from "../Reminders/Reminders.js";
+import Pets from "../pet/pets.js";
+import Diary from "../diary/diary.js";
+import Calendar from "../calendar/calendar.js";
+import Reminders from "../reminders/reminders.js";
 
 const MaterialTab = createMaterialBottomTabNavigator();
 
