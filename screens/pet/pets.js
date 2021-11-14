@@ -10,7 +10,7 @@ import { ActivityIndicator } from "react-native-paper";
 import petsMock from "../../mock/petsMock.js";
 import PetThumbnail from "./PetThumbnail.js";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import Constants from "../../lib/Constants.js";
+import Constants from "../../lib/constants.js";
 
 export default function Pets({ navigation, route }) {
   const [isLoading, setLoading] = useState(true);

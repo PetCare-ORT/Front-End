@@ -1,13 +1,11 @@
 import React from "react";
-import { StyleSheet, Button, Text, Alert } from "react-native";
+import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { MenuContext } from "react-native-popup-menu";
-
 import Constants from "./lib/constants.js";
-import LoginScreen from "./screens/Login/LoginScreen.js";
+import LoginScreen from "./screens/login/LoginScreen.js";
 import Main from "./screens/mainScreens/main.js";
-import DropdownMenu from "./screens/dropdownMenu/dropdownMenu.js";
 
 const Stack = createNativeStackNavigator();
 

@@ -1,10 +1,11 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Constants from "../../lib/Constants.js";
+import { Text } from "react-native";
+import Constants from "../../lib/constants.js";
 import Pets from "./pets.js";
 import petDetail from "./petDetail.js";
 import createPet from "./createPet.js";
-import DropdownMenu from "../DropdownMenu/DropdownMenu.js";
+import DropdownMenu from "../dropdownMenu/DropdownMenu.js";
 
 const Stack = createNativeStackNavigator();
 
@@ -16,6 +17,7 @@ export default function petNavigator() {
         component={Pets}
         initialParams={{ petId: "6186a3926791ce99c2915a41" }}
         options={{
+          headerLeft: () => <Text></Text>,
           headerRight: () => <DropdownMenu />,
         }}
       />

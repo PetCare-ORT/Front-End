@@ -6,9 +6,9 @@ export default function petDetail({ route }) {
   return (
     <View style={styles.container}>
       <Image
-        source={
-          "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=1.00xw:0.669xh;0,0.190xh&resize=1200:*"
-        }
+        source={{
+          uri: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=1.00xw:0.669xh;0,0.190xh&resize=1200:*",
+        }}
         style={styles.photo}
       />
       <Text style={styles.title}>

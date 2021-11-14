@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import Constants from "../../lib/Constants.js";
+import Constants from "../../lib/constants.js";
 
 export default function PetThumbnail(props) {
   return (

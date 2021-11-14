@@ -2,7 +2,7 @@ import React from "react";
 import Constants from "../../lib/constants";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import Pets from "../pet/pets.js";
+import petNavigator from "../pet/petNavigator.js";
 import Diary from "../diary/diary.js";
 import Calendar from "../calendar/calendar.js";
 import Reminders from "../reminders/reminders.js";
