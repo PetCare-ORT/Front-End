@@ -1,8 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 import petsMock from "../../mock/petsMock.js";
 import PetThumbnail from "./PetThumbnail.js";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import Constants from "../../lib/Constants.js";
 
 export default function Pets({ navigation, route }) {
   const [isLoading, setLoading] = useState(true);
@@ -36,6 +44,16 @@ export default function Pets({ navigation, route }) {
           )}
         />
       )}
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate(Constants.PET_CREATION_VIEW)}
+      >
+        <MaterialCommunityIcons
+          name="plus-circle"
+          color={"#767676"}
+          size={60}
+        />
+      </TouchableOpacity>
     </View>
   );
 }
@@ -48,6 +66,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   button: {
-    justifyContent: "flex-end",
+    flex: 1,
+    flexDirection: "row",
+    position: "absolute",
+    bottom: 10,
+    alignSelf: "flex-end",
+    justifyContent: "space-between",
+    backgroundColor: "transparent",
   },
 });

@@ -6,7 +6,7 @@ import { MenuContext } from "react-native-popup-menu";
 
 import Constants from "./lib/Constants.js";
 import LoginScreen from "./Screens/Login/LoginScreen.js";
-import Main from "./Screens/MainScreens/Main.js";
+import Main from "./Screens/MainScreens/main.js";
 import DropdownMenu from "./Screens/DropdownMenu/DropdownMenu.js";
 
 const Stack = createNativeStackNavigator();
@@ -23,16 +23,11 @@ export default function App() {
               headerShown: false,
             }}
           />
-
           <Stack.Screen
             name={Constants.MAIN_VIEW}
             component={Main}
             options={{
               headerShown: false,
-              // title: "Title",
-              // headerLeft: () => <Text></Text>,
-              // gestureEnabled: false,
-              // headerRight: () => <DropdownMenu />,
             }}
           />
         </Stack.Navigator>
