@@ -4,7 +4,7 @@ import { ActivityIndicator } from "react-native-paper";
 import petsMock from "../../mock/petsMock.js";
 import PetThumbnail from "./PetThumbnail.js";
 
-export default function Pets({ route }) {
+export default function Pets({ navigation, route }) {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
@@ -31,7 +31,9 @@ export default function Pets({ route }) {
           data={data}
           numColumns={2}
           keyExtractor={(item, index) => "key" + index}
-          renderItem={({ item }) => <PetThumbnail petData={item} />}
+          renderItem={({ item }) => (
+            <PetThumbnail petData={item} navigation={navigation} />
+          )}
         />
       )}
     </View>

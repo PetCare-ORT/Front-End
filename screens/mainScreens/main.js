@@ -2,7 +2,7 @@ import React from "react";
 import Constants from "../../lib/Constants";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import Pets from "../Pet/Pets.js";
+import petNavigator from "../Pet/petNavigator.js";
 import Diary from "../Diary/Diary.js";
 import Calendar from "../Calendar/Calendar.js";
 import Reminders from "../Reminders/Reminders.js";
@@ -17,9 +17,8 @@ export default function Main() {
       barStyle={{ backgroundColor: "#694fad" }}
     >
       <MaterialTab.Screen
-        name={Constants.PETS_VIEW}
-        component={Pets}
-        initialParams={{ petId: "6186a3926791ce99c2915a41" }}
+        name={Constants.PETS_NAVIGATOR}
+        component={petNavigator}
         options={{
           tabBarLabel: "Pets",
           tabBarIcon: ({ color }) => (

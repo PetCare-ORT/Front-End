@@ -28,10 +28,11 @@ export default function App() {
             name={Constants.MAIN_VIEW}
             component={Main}
             options={{
-              title: "Title",
-              headerLeft: () => <Text></Text>,
-              gestureEnabled: false,
-              headerRight: () => <DropdownMenu />,
+              headerShown: false,
+              // title: "Title",
+              // headerLeft: () => <Text></Text>,
+              // gestureEnabled: false,
+              // headerRight: () => <DropdownMenu />,
             }}
           />
         </Stack.Navigator>

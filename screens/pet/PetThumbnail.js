@@ -1,16 +1,19 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import Constants from "../../lib/Constants.js";
 
 export default function PetThumbnail(props) {
-  function showPetDetails() {
-    alert(
-      `Nombre: ${props.petData.name}\r\nEspecie: ${props.petData.species}\r\nRaza: ${props.petData.race}\r\nNacimiento: ${props.petData.birthDate}`
-    );
-  }
   return (
     <View>
-      <TouchableOpacity onPress={() => showPetDetails()} style={styles.button}>
+      <TouchableOpacity
+        onPress={() =>
+          props.navigation.navigate(Constants.PET_DETAIL_VIEW, {
+            pet: props.petData,
+          })
+        }
+        style={styles.button}
+      >
         <MaterialCommunityIcons name="dog" color={"#767676"} size={26} />
         <Text>{props.petData.name}</Text>
       </TouchableOpacity>
