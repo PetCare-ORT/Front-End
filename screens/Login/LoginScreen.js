@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import Constants from "../../lib/Constants.js";
+import Constants from "../../lib/constants.js";
 
 export default function LoginScreen({ navigation }) {
   function login() {
