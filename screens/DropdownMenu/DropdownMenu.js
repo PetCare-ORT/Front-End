@@ -1,8 +1,4 @@
-// React Native Popup Menu – Over Flow Menu
-// https://aboutreact.com/react-native-popup-menu/
-
 import React from "react";
-
 import { View, Text, StyleSheet } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Constants from "../../lib/constants";
