@@ -1,6 +1,17 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  TextInput,
+} from "react-native";
 import Constants from "../../lib/constants.js";
+import { useState } from "react/cjs/react.development";
+
+// LOGIN CON GOOGLE
+// import * as Google from "expo-auth-session/providers/google";
+// import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 export default function LoginScreen({ navigation }) {
   function login() {
@@ -10,28 +21,29 @@ export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [request, response, promptAsync] = Google.useAuthRequest({
-    expoClientId:
-      "27396392572-bio472p3pmkg4b2icr7qnovq7rbaq5a3.apps.googleusercontent.com",
-    iosClientId: "GOOGLE_GUID.apps.googleusercontent.com",
-    androidClientId: "GOOGLE_GUID.apps.googleusercontent.com",
-    webClientId: "GOOGLE_GUID.apps.googleusercontent.com",
-  });
+  //LOGIN CON GOOGLE
+  // const [request, response, promptAsync] = Google.useAuthRequest({
+  //   expoClientId:
+  //     "27396392572-bio472p3pmkg4b2icr7qnovq7rbaq5a3.apps.googleusercontent.com",
+  //   iosClientId: "GOOGLE_GUID.apps.googleusercontent.com",
+  //   androidClientId: "GOOGLE_GUID.apps.googleusercontent.com",
+  //   webClientId: "GOOGLE_GUID.apps.googleusercontent.com",
+  // });
 
-  React.useEffect(() => {
-    if (response?.type === "success") {
-      const { authentication } = response;
-      console.log("Autenticando data:", authentication);
+  // React.useEffect(() => {
+  //   if (response?.type === "success") {
+  //     const { authentication } = response;
+  //     console.log("Autenticando data:", authentication);
 
-      //llamar API de google para traerme info de usuario
+  //     //llamar API de google para traerme info de usuario
 
-      //fetch(`https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${authentication.accessToken}`)
-      //.then(res => res.json())
-      //.then(data => {
-      //  console.log("User data:", data)
-      // });
-    }
-  }, [response]);
+  //     //fetch(`https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${authentication.accessToken}`)
+  //     //.then(res => res.json())
+  //     //.then(data => {
+  //     //  console.log("User data:", data)
+  //     // });
+  //   }
+  // }, [response]);
 
   return (
     <View style={styles.container}>
@@ -40,8 +52,8 @@ export default function LoginScreen({ navigation }) {
         <TextInput
           style={styles.inputText}
           placeholder="Email"
-          placeholderTextColor="#003f5c"
-          onChangeText={(text) => this.setState({ email: text })}
+          placeholderTextColor="#d1d1d1"
+          onChangeText={(text) => setEmail(text)}
         />
       </View>
       <View style={styles.inputView}>
@@ -49,34 +61,19 @@ export default function LoginScreen({ navigation }) {
           secureTextEntry
           style={styles.inputText}
           placeholder="Password"
-          placeholderTextColor="#003f5c"
-          onChangeText={(text) => this.setState({ password: text })}
+          placeholderTextColor="#d1d1d1"
+          onChangeText={(text) => setPassword(text)}
         />
       </View>
-      <TouchableOpacity style={styles.loginBtn}>
-        <Text style={styles.loginText} onPress={() => login()} n>
-          LOGIN
-        </Text>
+      <TouchableOpacity style={styles.loginBtn} onPress={() => login()}>
+        <Text style={styles.loginText}>LOGIN</Text>
       </TouchableOpacity>
-      <TouchableOpacity
-        disabled={!request}
-        onPress={() => {
-          promptAsync().then(() => login());
-        }}
-      >
-        <MaterialCommunityIcons name="google" color={"#DB4437"} size={26} />
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <Text style={styles.loginText} onPress={() => login()}>
-          SIGNUP
-        </Text>
+      <TouchableOpacity style={styles.signBtn} onPress={() => login()}>
+        <Text style={styles.loginText}>SIGNUP</Text>
       </TouchableOpacity>
 
-      {/* <Text></Text>
-      <TouchableOpacity onPress={() => login()}>
-        <Text> LOGIN </Text>
-      </TouchableOpacity>
-      <TouchableOpacity
+      {/*LOGIN CON GOOGLE*/}
+      {/* <TouchableOpacity
         disabled={!request}
         onPress={() => {
           promptAsync().then(() => login());
@@ -113,6 +110,7 @@ const styles = StyleSheet.create({
   inputText: {
     height: 50,
     color: "white",
+    borderColor: "transparent",
   },
   loginBtn: {
     width: "80%",
@@ -122,6 +120,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 40,
+    marginBottom: 10,
+  },
+  signBtn: {
+    width: "80%",
+    backgroundColor: "#fb5b5a",
+    borderRadius: 25,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 10,
     marginBottom: 10,
   },
   loginText: {
