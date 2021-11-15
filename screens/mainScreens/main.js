@@ -1,5 +1,5 @@
 import React from "react";
-import Constants from "../../lib/Constants";
+import Constants from "../../lib/constants";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Pets from "../pet/pets.js";

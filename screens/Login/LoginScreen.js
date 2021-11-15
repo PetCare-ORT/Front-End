@@ -1,16 +1,6 @@
 import React from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Button,
-  TextInput,
-} from "react-native";
-import Constants from "../../lib/Constants.js";
-import * as Google from "expo-auth-session/providers/google";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { useState } from "react/cjs/react.development";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import Constants from "../../lib/constants.js";
 
 export default function LoginScreen({ navigation }) {
   function login() {
