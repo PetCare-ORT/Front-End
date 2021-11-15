@@ -14,7 +14,7 @@ export default function PetThumbnail(props) {
         }
         style={styles.button}
       >
-        <MaterialCommunityIcons name="dog" color={"#767676"} size={26} />
+        <MaterialCommunityIcons name="dog" color={"#767676"} size={30} />
         <Text>{props.petData.name}</Text>
       </TouchableOpacity>
     </View>
@@ -28,6 +28,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginRight: 10,
     marginLeft: 10,
-    padding: 20,
+    padding: 50,
   },
 });
