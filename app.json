@@ -3,10 +3,7 @@
     "name": "Front-end",
     "slug": "Front-end",
     "version": "1.0.0",
-<<<<<<< HEAD
     "scheme": "petcare",
-=======
->>>>>>> main
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -17,13 +14,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-<<<<<<< HEAD
     "assetBundlePatterns": ["**/*"],
-=======
-    "assetBundlePatterns": [
-      "**/*"
-    ],
->>>>>>> main
     "ios": {
       "supportsTablet": true
     },

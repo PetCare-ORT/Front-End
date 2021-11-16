@@ -1,5 +1,4 @@
 import React from "react";
-<<<<<<< HEAD
 import Constants from "../../lib/Constants";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -58,13 +57,5 @@ export default function Main() {
         }}
       />
     </MaterialTab.Navigator>
-=======
-
-export default function main() {
-  return (
-    <View style={styles.container}>
-      <Text>Main screen</Text>
-    </View>
->>>>>>> main
   );
 }

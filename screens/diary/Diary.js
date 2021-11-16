@@ -1,5 +1,4 @@
 import React from "react";
-<<<<<<< HEAD
 import { View, Text, StyleSheet } from "react-native";
 export default function Diary() {
   return (
@@ -16,13 +15,3 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
-=======
-
-export default function diary() {
-  return (
-    <View style={styles.container}>
-      <Text>entradas diario</Text>
-    </View>
-  );
-}
->>>>>>> main

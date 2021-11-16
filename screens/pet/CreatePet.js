@@ -1,5 +1,4 @@
 import React from "react";
-<<<<<<< HEAD
 import { View, Text, StyleSheet, Button, TextInput } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 
@@ -138,13 +137,3 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
 });
-=======
-
-export default function createPet() {
-  return (
-    <View style={styles.container}>
-      <Text>Create Pet screen</Text>
-    </View>
-  );
-}
->>>>>>> main
