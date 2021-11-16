@@ -3,7 +3,7 @@
     "name": "Front-end",
     "slug": "Front-end",
     "version": "1.0.0",
-    "scheme": "petCare",
+    "scheme": "petcare",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {

@@ -6,7 +6,7 @@ import {
   StyleSheet,
   TextInput,
 } from "react-native";
-import Constants from "../../lib/constants.js";
+import Constants from "../../lib/Constants.js";
 import { useState } from "react/cjs/react.development";
 
 // LOGIN CON GOOGLE

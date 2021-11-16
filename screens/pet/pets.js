@@ -7,10 +7,10 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
-import petsMock from "../../mock/petsMock.js";
+import petsMock from "../../mock/PetsMock.js";
 import PetThumbnail from "./PetThumbnail.js";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import Constants from "../../lib/constants.js";
+import Constants from "../../lib/Constants.js";
 
 export default function Pets({ navigation, route }) {
   const [isLoading, setLoading] = useState(true);

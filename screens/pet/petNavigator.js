@@ -1,11 +1,12 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Text } from "react-native";
-import Constants from "../../lib/constants.js";
-import Pets from "./pets.js";
-import petDetail from "./petDetail.js";
-import createPet from "./createPet.js";
+import Constants from "../../lib/Constants.js";
+import Pets from "./Pets.js";
+import petDetail from "./PetDetail.js";
+import createPet from "./CreatePet.js";
 import DropdownMenu from "../dropdownMenu/DropdownMenu.js";
+
 
 const Stack = createNativeStackNavigator();
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import Constants from "../../lib/constants";
+import Constants from "../../lib/Constants";
 import Menu, {
   MenuTrigger,
   MenuOptions,
