@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import {
   View,
   Text,
@@ -7,19 +7,38 @@ import {
   TextInput,
 } from "react-native";
 import Constants from "../../lib/Constants.js";
-import { useState } from "react/cjs/react.development";
+import GlobalContext from "../../Context";
+import RequestOptions from "../../lib/RequestOptions.js";
 
 // LOGIN CON GOOGLE
 // import * as Google from "expo-auth-session/providers/google";
 // import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 export default function LoginScreen({ navigation }) {
-  function login() {
-    navigation.navigate(Constants.MAIN_VIEW);
-  }
-
+  const { state, dispatch } = useContext(GlobalContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const login = async (email, password) => {
+    const options = RequestOptions.LOGIN(email, password);
+
+    const token = fetch(Constants.HOST + "/api/users/login", options)
+      .then((resp) => {
+        console.log(resp);
+        if (!resp.ok) throw Error("Error en login:" + resp.statusText);
+        return resp.json();
+      })
+      .then((jsonResp) => {
+        console.log("resp json:", jsonResp);
+        dispatch({
+          type: "LOGIN_AND_STORE",
+          payload: { token: jsonResp.token },
+        });
+        navigation.navigate(Constants.MAIN_VIEW);
+      })
+      .catch((error) => alert("Error:" + error));
+    return token;
+  };
 
   //LOGIN CON GOOGLE
   // const [request, response, promptAsync] = Google.useAuthRequest({
@@ -65,7 +84,10 @@ export default function LoginScreen({ navigation }) {
           onChangeText={(text) => setPassword(text)}
         />
       </View>
-      <TouchableOpacity style={styles.loginBtn} onPress={() => login()}>
+      <TouchableOpacity
+        style={styles.loginBtn}
+        onPress={() => login(email, password)}
+      >
         <Text style={styles.loginText}>LOGIN</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.signBtn} onPress={() => login()}>
