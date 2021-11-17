@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   View,
   Text,
@@ -19,17 +19,19 @@ export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  useEffect(() => {
+    if (state.loggedIn) navigation.navigate(Constants.MAIN_VIEW);
+  }, [state.loggedIn]);
+
   const login = async (email, password) => {
     const options = RequestOptions.LOGIN(email, password);
 
-    const token = fetch(Constants.HOST + "/api/users/login", options)
+    return fetch(Constants.HOST + "/api/users/login", options)
       .then((resp) => {
-        console.log(resp);
         if (!resp.ok) throw Error("Error en login:" + resp.statusText);
         return resp.json();
       })
       .then((jsonResp) => {
-        console.log("resp json:", jsonResp);
         dispatch({
           type: "LOGIN_AND_STORE",
           payload: { token: jsonResp.token },
@@ -37,7 +39,6 @@ export default function LoginScreen({ navigation }) {
         navigation.navigate(Constants.MAIN_VIEW);
       })
       .catch((error) => alert("Error:" + error));
-    return token;
   };
 
   //LOGIN CON GOOGLE

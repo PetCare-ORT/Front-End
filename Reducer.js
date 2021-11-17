@@ -37,6 +37,6 @@ const storeToken = async (value) => {
   try {
     await AsyncStorage.setItem("token", JSON.stringify(value));
   } catch (e) {
-    // saving error
+    console.log(e);
   }
 };
