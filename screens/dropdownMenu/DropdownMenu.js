@@ -8,7 +8,7 @@ import Menu, {
   MenuOption,
 } from "react-native-popup-menu";
 import { useNavigation } from "@react-navigation/native";
-import GlobalContext from "../../Context";
+import GlobalContext from "../../context";
 
 //onSelect={(value) => alert(`Selected number: ${value}`)}
 

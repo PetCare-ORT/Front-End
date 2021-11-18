@@ -10,7 +10,7 @@ import { ActivityIndicator } from "react-native-paper";
 import PetThumbnail from "./PetThumbnail.js";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Constants from "../../lib/Constants.js";
-import GlobalContext from "../../Context";
+import GlobalContext from "../../context";
 
 export default function Pets({ navigation, route }) {
   const { state, dispatch } = useContext(GlobalContext);

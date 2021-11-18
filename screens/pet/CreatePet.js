@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { View, Text, StyleSheet, Button, TextInput } from "react-native";
 import { useForm, Controller } from "react-hook-form";
-import GlobalContext from "../../Context";
+import GlobalContext from "../../context";
 import Constants from "../../lib/Constants.js";
 import { NavigationContainer } from "@react-navigation/native";
 

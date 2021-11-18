@@ -7,7 +7,7 @@ import {
   TextInput,
 } from "react-native";
 import Constants from "../../lib/Constants.js";
-import GlobalContext from "../../Context";
+import GlobalContext from "../../context";
 import RequestOptions from "../../lib/RequestOptions.js";
 
 // LOGIN CON GOOGLE
@@ -16,8 +16,8 @@ import RequestOptions from "../../lib/RequestOptions.js";
 
 export default function LoginScreen({ navigation }) {
   const { state, dispatch } = useContext(GlobalContext);
-  const [email, setEmail] = useState("el@santo.com");
-  const [password, setPassword] = useState("santo");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   useEffect(() => {
     if (state.loggedIn) navigation.navigate(Constants.MAIN_VIEW);

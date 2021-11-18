@@ -6,8 +6,8 @@ import { MenuProvider } from "react-native-popup-menu";
 import Constants from "./lib/Constants.js";
 import LoginScreen from "./screens/login/LoginScreen.js";
 import Main from "./screens/mainScreens/Main.js";
-import { Datos, reducer } from "./reducer";
-import GlobalContext from "./Context";
+import { Datos, reducer } from "./Reducer";
+import GlobalContext from "./context";
 
 const Stack = createNativeStackNavigator();
 

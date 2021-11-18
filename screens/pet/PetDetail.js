@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Constants from "../../lib/Constants.js";
-import GlobalContext from "../../Context";
+import GlobalContext from "../../context";
 
 export default function petDetail({ navigation, route }) {
   const { state, dispatch } = useContext(GlobalContext);
