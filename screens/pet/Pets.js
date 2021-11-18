@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
-import petsMock from "../../mock/PetsMock.js";
 import PetThumbnail from "./PetThumbnail.js";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Constants from "../../lib/Constants.js";
@@ -51,6 +50,13 @@ export default function Pets({ navigation, route }) {
     }
   }, []);
 
+  useEffect(() => {
+    if (route.params.reload == true) {
+      getPets();
+      route.params.reload = undefined;
+    }
+  }, [route.params.reload]);
+
   return (
     <View style={styles.container}>
       <Text>Pets</Text>
@@ -69,7 +75,7 @@ export default function Pets({ navigation, route }) {
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          console.log(state);
+          console.log("RELOAD STATE" + route.params.reload);
           navigation.navigate(Constants.PET_CREATION_VIEW);
         }}
       >

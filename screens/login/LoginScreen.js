@@ -16,8 +16,8 @@ import RequestOptions from "../../lib/RequestOptions.js";
 
 export default function LoginScreen({ navigation }) {
   const { state, dispatch } = useContext(GlobalContext);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("el@santo.com");
+  const [password, setPassword] = useState("santo");
 
   useEffect(() => {
     if (state.loggedIn) navigation.navigate(Constants.MAIN_VIEW);

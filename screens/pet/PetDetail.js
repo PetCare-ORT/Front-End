@@ -1,8 +1,39 @@
-import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import React, { useContext } from "react";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import Constants from "../../lib/Constants.js";
+import GlobalContext from "../../Context";
 
-export default function petDetail({ route }) {
+export default function petDetail({ navigation, route }) {
+  const { state, dispatch } = useContext(GlobalContext);
   const { pet } = route.params;
+
+  const deletePet = async () => {
+    try {
+      const headers = new Headers();
+      headers.append("Content-type", "application/json");
+      headers.append("Token", state.token);
+      const requestOptions = {
+        method: "DELETE",
+        headers: headers,
+      };
+      fetch(Constants.HOST + "/api/pets/" + pet._id, requestOptions)
+        .then((resp) => {
+          if (!resp.ok) {
+            throw Error("Delete Error:" + resp.statusText);
+          } else {
+            alert("Pet deleted successfully!");
+            navigation.navigate(Constants.PETS_VIEW, { reload: true });
+          }
+        })
+        .catch((error) => {
+          alert("Error coso: " + error);
+        });
+    } catch (error) {
+      alert("Error: " + error);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Image
@@ -20,8 +51,29 @@ export default function petDetail({ route }) {
           Species: {pet.species}
           {"\n"}
         </Text>
-        <Text>Race: {pet.race}</Text>
+        <Text>
+          Race: {pet.race}
+          {"\n"}
+        </Text>
+        <Text>
+          Birth Date: {pet.birthDate}
+          {"\n"}
+        </Text>
+        <Text>Gender {pet.gender}</Text>
       </Text>
+
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          deletePet();
+        }}
+      >
+        <MaterialCommunityIcons
+          name="delete-circle"
+          color={"#d11515"}
+          size={60}
+        />
+      </TouchableOpacity>
     </View>
   );
 }
@@ -49,5 +101,15 @@ const styles = StyleSheet.create({
     height: 200,
     resizeMode: "center",
     margin: 5,
+  },
+  button: {
+    flex: 1,
+    flexDirection: "row",
+    position: "absolute",
+    top: 10,
+    right: 5,
+    alignSelf: "flex-end",
+    justifyContent: "space-between",
+    backgroundColor: "transparent",
   },
 });
