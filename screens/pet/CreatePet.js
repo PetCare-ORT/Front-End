@@ -37,7 +37,7 @@ export default function CreatePet({ navigation }) {
       fetch(Constants.HOST + "/api/pets/", requestOptions)
         .then((resp) => {
           if (!resp.ok) {
-            throw Error("Error en login:" + resp.statusText);
+            throw Error("Error creando pet:" + resp.statusText);
           } else {
             alert("Pet added successfully!");
             navigation.navigate(Constants.PETS_VIEW, { reload: true });

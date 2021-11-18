@@ -75,7 +75,6 @@ export default function Pets({ navigation, route }) {
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          console.log("RELOAD STATE" + route.params.reload);
           navigation.navigate(Constants.PET_CREATION_VIEW);
         }}
       >

@@ -74,6 +74,18 @@ export default function petDetail({ navigation, route }) {
           size={60}
         />
       </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.editButton}
+        onPress={() => {
+          alert("edit");
+        }}
+      >
+        <MaterialCommunityIcons
+          name="circle-edit-outline"
+          color={"#d11515"}
+          size={60}
+        />
+      </TouchableOpacity>
     </View>
   );
 }
@@ -107,6 +119,16 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     position: "absolute",
     top: 10,
+    right: 5,
+    alignSelf: "flex-end",
+    justifyContent: "space-between",
+    backgroundColor: "transparent",
+  },
+  editButton: {
+    flex: 1,
+    flexDirection: "row",
+    position: "absolute",
+    top: 80,
     right: 5,
     alignSelf: "flex-end",
     justifyContent: "space-between",
