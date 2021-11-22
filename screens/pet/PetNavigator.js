@@ -7,7 +7,6 @@ import petDetail from "./PetDetail.js";
 import createPet from "./CreatePet.js";
 import DropdownMenu from "../dropdownMenu/DropdownMenu.js";
 
-
 const Stack = createNativeStackNavigator();
 
 export default function petNavigator() {
@@ -16,7 +15,7 @@ export default function petNavigator() {
       <Stack.Screen
         name={Constants.PETS_VIEW}
         component={Pets}
-        initialParams={{ petId: "6186a3926791ce99c2915a41" }}
+        initialParams={{ reload: true }}
         options={{
           headerLeft: () => <Text></Text>,
           headerRight: () => <DropdownMenu />,
