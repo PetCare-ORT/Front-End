@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, Text, StyleSheet, Button, TextInput } from "react-native";
 import { useForm, Controller } from "react-hook-form";
+import GlobalContext from "../../context";
+import Constants from "../../lib/Constants.js";
+import { NavigationContainer } from "@react-navigation/native";
 
-export default function CreatePet() {
+export default function CreatePet({ navigation }) {
+  const { state, dispatch } = useContext(GlobalContext);
+
   const {
     register,
     setValue,
@@ -19,8 +24,31 @@ export default function CreatePet() {
       gender: "",
     },
   });
-  const onSubmit = (data) => {
-    alert(JSON.stringify(data));
+  const onSubmit = async (data) => {
+    try {
+      const headers = new Headers();
+      headers.append("Content-type", "application/json");
+      headers.append("Token", state.token);
+      const requestOptions = {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(data),
+      };
+      fetch(Constants.HOST + "/api/pets/", requestOptions)
+        .then((resp) => {
+          if (!resp.ok) {
+            throw Error("Error creando pet:" + resp.statusText);
+          } else {
+            alert("Pet added successfully!");
+            navigation.navigate(Constants.PETS_VIEW, { reload: true });
+          }
+        })
+        .catch((error) => {
+          alert("Error coso: " + error);
+        });
+    } catch (error) {
+      alert("Error: " + error);
+    }
   };
 
   return (

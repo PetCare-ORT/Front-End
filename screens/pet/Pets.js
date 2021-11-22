@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   View,
   Text,
@@ -7,27 +7,55 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
-import petsMock from "../../mock/PetsMock.js";
 import PetThumbnail from "./PetThumbnail.js";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Constants from "../../lib/Constants.js";
+import GlobalContext from "../../context";
 
 export default function Pets({ navigation, route }) {
+  const { state, dispatch } = useContext(GlobalContext);
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
-  const getPets = () => {
-    const petId = route.params.petId;
-    const pet = petsMock.filter((pet) => {
-      return pet._id == petId;
-    });
-    setData(petsMock);
-    setLoading(false);
+  const getPets = async () => {
+    const headers = new Headers();
+    headers.append("Content-type", "application/json");
+    headers.append("Token", state.token);
+    const requestOptions = {
+      headers: headers,
+    };
+    try {
+      const response = await fetch(
+        Constants.HOST + "/api/pets/",
+        requestOptions
+      );
+      const json = await response.json();
+      setData(json);
+      dispatch({
+        type: "STORE_PETS",
+        payload: { pets: json },
+      });
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
-    getPets();
+    if (state.pets.length == 0) {
+      getPets();
+    } else {
+      setData(state.pets);
+    }
   }, []);
+
+  useEffect(() => {
+    if (route.params.reload == true) {
+      getPets();
+      route.params.reload = undefined;
+    }
+  }, [route.params.reload]);
 
   return (
     <View style={styles.container}>
@@ -46,7 +74,9 @@ export default function Pets({ navigation, route }) {
       )}
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate(Constants.PET_CREATION_VIEW)}
+        onPress={() => {
+          navigation.navigate(Constants.PET_CREATION_VIEW);
+        }}
       >
         <MaterialCommunityIcons
           name="plus-circle"
