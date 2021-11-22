@@ -18,6 +18,12 @@ export const reducer = (state, action) => {
         token: action.payload.token,
         loggedIn: true,
       };
+    case "LOGIN":
+      return {
+        ...state,
+        token: action.payload.token,
+        loggedIn: true,
+      };
     case "LOGOUT":
       storeToken(null);
       return {
