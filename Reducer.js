@@ -1,4 +1,4 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { saveToken, removeToken } from "./utils/tokenStorage";
 
 export const Datos = {
   token: "",
@@ -12,7 +12,7 @@ export const Datos = {
 export const reducer = (state, action) => {
   switch (action.type) {
     case "LOGIN_AND_STORE":
-      storeToken(action.payload.token);
+      saveToken(action.payload.token);
       return {
         ...state,
         token: action.payload.token,
@@ -25,7 +25,7 @@ export const reducer = (state, action) => {
         loggedIn: true,
       };
     case "LOGOUT":
-      storeToken(null);
+      removeToken();
       return {
         ...state,
         token: "",
@@ -36,13 +36,5 @@ export const reducer = (state, action) => {
         ...state,
         pets: action.payload.pets,
       };
-  }
-};
-
-const storeToken = async (value) => {
-  try {
-    await AsyncStorage.setItem("token", JSON.stringify(value));
-  } catch (e) {
-    console.log(e);
   }
 };
