@@ -1,13 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import { View, Text, StyleSheet, Button, TextInput } from "react-native";
 import { useForm, Controller } from "react-hook-form";
-import GlobalContext from "../../context";
 import Constants from "../../lib/Constants.js";
-import { NavigationContainer } from "@react-navigation/native";
+import { addPet } from "../../services/petsApi";
 
 export default function CreatePet({ navigation }) {
-  const { state, dispatch } = useContext(GlobalContext);
-
   const {
     register,
     setValue,
@@ -24,28 +21,15 @@ export default function CreatePet({ navigation }) {
       gender: "",
     },
   });
-  const onSubmit = async (data) => {
+  const onSubmit = async (pet) => {
     try {
-      const headers = new Headers();
-      headers.append("Content-type", "application/json");
-      headers.append("Token", state.token);
-      const requestOptions = {
-        method: "POST",
-        headers: headers,
-        body: JSON.stringify(data),
-      };
-      fetch(Constants.HOST + "/api/pets/", requestOptions)
-        .then((resp) => {
-          if (!resp.ok) {
-            throw Error("Error creando pet:" + resp.statusText);
-          } else {
-            alert("Pet added successfully!");
-            navigation.navigate(Constants.PETS_VIEW, { reload: true });
-          }
-        })
-        .catch((error) => {
-          alert("Error coso: " + error);
-        });
+      const addResult = await addPet(pet);
+      if (addResult.status == 200) {
+        alert("Pet added successfully!");
+        navigation.navigate(Constants.PETS_VIEW, { reload: true });
+      } else {
+        throw Error("Error creando pet:" + addResult.statusText);
+      }
     } catch (error) {
       alert("Error: " + error);
     }

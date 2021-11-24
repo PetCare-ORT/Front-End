@@ -11,6 +11,7 @@ import PetThumbnail from "./PetThumbnail.js";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Constants from "../../lib/Constants.js";
 import GlobalContext from "../../context";
+import { getUserPets } from "../../services/helpers/petsAPI.js";
 
 export default function Pets({ navigation, route }) {
   const { state, dispatch } = useContext(GlobalContext);
@@ -18,22 +19,13 @@ export default function Pets({ navigation, route }) {
   const [data, setData] = useState([]);
 
   const getPets = async () => {
-    const headers = new Headers();
-    headers.append("Content-type", "application/json");
-    headers.append("Token", state.token);
-    const requestOptions = {
-      headers: headers,
-    };
     try {
-      const response = await fetch(
-        Constants.HOST + "/api/pets/",
-        requestOptions
-      );
-      const json = await response.json();
-      setData(json);
+      const pets = await getUserPets();
+      const petsData = pets.data;
+      setData(petsData);
       dispatch({
         type: "STORE_PETS",
-        payload: { pets: json },
+        payload: { pets: petsData },
       });
     } catch (error) {
       console.error(error);
@@ -41,14 +33,6 @@ export default function Pets({ navigation, route }) {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    if (state.pets.length == 0) {
-      getPets();
-    } else {
-      setData(state.pets);
-    }
-  }, []);
 
   useEffect(() => {
     if (route.params.reload == true) {
