@@ -2,32 +2,30 @@ import axios from "axios";
 import { getRequestHeaders } from "./helpers/requestHeaders";
 import Constants from "../lib/Constants";
 
-const domain = Constants.HOST;
+const petUrl = Constants.HOST + Constants.PET_ENDPOINT
 
 export const getUserPets = async () => {
-  const endpoint = domain + "/api/pets";
   return getRequestHeaders().then((headers) => {
-    return axios.get(endpoint, headers);
+    return axios.get(petUrl, headers);
   });
 };
 
 export const addPet = async (pet) => {
-  const endpoint = domain + "/api/pets";
   return getRequestHeaders().then((headers) => {
-    return axios.post(endpoint, pet, headers);
+    return axios.post(petUrl, pet, headers);
   });
 };
 
 export const editPet = async (petId, updateData) => {
-  const endpoint = domain + `/api/pets/${petId}`;
+  const editPetEndpoint = petUrl +`/${petId}`;
   return getRequestHeaders().then((headers) => {
-    return axios.put(endpoint, updateData, headers);
+    return axios.put(editPetEndpoint, updateData, headers);
   });
 };
 
 export const deletePet = async (petId) => {
-  const endpoint = domain + `/api/pets/${petId}`;
+  const deletePetEndpoint = petUrl +`/${petId}`;
   return getRequestHeaders().then((headers) => {
-    return axios.delete(endpoint, headers);
+    return axios.delete(deletePetEndpoint, headers);
   });
 };

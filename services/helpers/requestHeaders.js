@@ -13,3 +13,7 @@ export function getRequestHeaders(withToken = true) {
     return { headers: headers };
   }
 }
+
+export function setRequestHeaders(withToken = False ){
+  return []
+}
