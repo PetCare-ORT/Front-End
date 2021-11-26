@@ -23,13 +23,10 @@ export default function CreatePet({ navigation }) {
   });
   const onSubmit = async (pet) => {
     try {
-      const addResult = await addPet(pet);
-      if (addResult.status == 200) {
+      await addPet(pet).then(() => {
         alert("Pet added successfully!");
         navigation.navigate(Constants.PETS_VIEW, { reload: true });
-      } else {
-        throw Error("Error creando pet:" + addResult.statusText);
-      }
+      });
     } catch (error) {
       alert("Error: " + error);
     }

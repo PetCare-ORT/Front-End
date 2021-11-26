@@ -9,15 +9,12 @@ export default function petDetail({ navigation, route }) {
 
   const petDelete = async () => {
     try {
-      const deleteResult = await deletePet(pet._id);
-      if (deleteResult.status == 200) {
+      await deletePet(pet._id).then(() => {
         alert("Pet deleted successfully!");
         navigation.navigate(Constants.PETS_VIEW, { reload: true });
-      } else {
-        throw Error("Error creando pet:" + deleteResult.statusText);
-      }
+      });
     } catch (error) {
-      alert("Error: " + error);
+      alert(error);
     }
   };
 

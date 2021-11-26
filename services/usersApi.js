@@ -1,20 +1,14 @@
 import axios from "axios";
-import { getRequestHeaders , setRequestHeaders} from "./helpers/requestHeaders";
 import Constants from "../lib/Constants";
 
-const userUrl = Constants.HOST + Constants.USER_ENDPOINT
+const userUrl = Constants.HOST + Constants.USER_ENDPOINT;
 
-export const registerUser = async () => {
-  let endpoint = userUrl + '/register'
-  return getRequestHeaders().then((headers) => {
-    return axios.get(endpoint, headers);
-  });
+export const registerUser = async (user) => {
+  let endpoint = userUrl + "/register";
+  return axios.post(endpoint, user);
 };
 
 export const login = async (user) => {
-  let endpoint = userUrl + '/login'
-  return setRequestHeaders().then((headers) => {
-    return axios.post(endpoint, user, headers);
-  });
+  let endpoint = userUrl + "/login";
+  return axios.post(endpoint, user);
 };
-
