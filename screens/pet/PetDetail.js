@@ -1,36 +1,20 @@
-import React, { useContext } from "react";
+import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Constants from "../../lib/Constants.js";
-import GlobalContext from "../../context";
+import { deletePet } from "../../services/petsApi.js";
 
 export default function petDetail({ navigation, route }) {
-  const { state, dispatch } = useContext(GlobalContext);
   const { pet } = route.params;
 
-  const deletePet = async () => {
+  const petDelete = async () => {
     try {
-      const headers = new Headers();
-      headers.append("Content-type", "application/json");
-      headers.append("Token", state.token);
-      const requestOptions = {
-        method: "DELETE",
-        headers: headers,
-      };
-      fetch(Constants.HOST + "/api/pets/" + pet._id, requestOptions)
-        .then((resp) => {
-          if (!resp.ok) {
-            throw Error("Delete Error:" + resp.statusText);
-          } else {
-            alert("Pet deleted successfully!");
-            navigation.navigate(Constants.PETS_VIEW, { reload: true });
-          }
-        })
-        .catch((error) => {
-          alert("Error coso: " + error);
-        });
+      await deletePet(pet._id).then(() => {
+        alert("Pet deleted successfully!");
+        navigation.navigate(Constants.PETS_VIEW, { reload: true });
+      });
     } catch (error) {
-      alert("Error: " + error);
+      alert(error);
     }
   };
 
@@ -65,7 +49,7 @@ export default function petDetail({ navigation, route }) {
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          deletePet();
+          petDelete();
         }}
       >
         <MaterialCommunityIcons

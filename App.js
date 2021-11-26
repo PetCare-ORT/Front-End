@@ -8,7 +8,7 @@ import LoginScreen from "./screens/login/LoginScreen.js";
 import Main from "./screens/mainScreens/Main.js";
 import { Datos, reducer } from "./Reducer";
 import GlobalContext from "./context";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getStoredToken } from "./utils/tokenStorage.js";
 
 const Stack = createNativeStackNavigator();
 
@@ -16,14 +16,11 @@ export default function App() {
   const [state, dispatch] = useReducer(reducer, Datos);
 
   useEffect(() => {
-    AsyncStorage.getItem("token").then((token) => {
-      if (token !== null) {
-        const jsonToken = JSON.parse(token);
-        dispatch({
-          type: "LOGIN",
-          payload: { token: jsonToken },
-        });
-      }
+    getStoredToken().then((token) => {
+      dispatch({
+        type: "LOGIN",
+        payload: { token: token },
+      });
     });
   }, []);
 

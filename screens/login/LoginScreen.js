@@ -9,6 +9,7 @@ import {
 import Constants from "../../lib/Constants.js";
 import GlobalContext from "../../context";
 import RequestOptions from "../../lib/RequestOptions.js";
+import { login } from "../../services/usersApi.js";
 
 // LOGIN CON GOOGLE
 // import * as Google from "expo-auth-session/providers/google";
@@ -23,22 +24,18 @@ export default function LoginScreen({ navigation }) {
     if (state.loggedIn) navigation.navigate(Constants.MAIN_VIEW);
   }, [state.loggedIn]);
 
-  const login = async (email, password) => {
-    const options = RequestOptions.LOGIN(email, password);
-
-    return fetch(Constants.HOST + "/api/users/login", options)
-      .then((resp) => {
-        if (!resp.ok) throw Error("Error en login:" + resp.statusText);
-        return resp.json();
-      })
-      .then((jsonResp) => {
-        dispatch({
-          type: "LOGIN_AND_STORE",
-          payload: { token: jsonResp.token },
-        });
-        navigation.navigate(Constants.MAIN_VIEW);
-      })
-      .catch((error) => alert("Error:" + error));
+  const userLogin = async (email, password) => {
+    const user = { email: email, password: password };
+    try {
+      const loginResult = await login(user);
+      dispatch({
+        type: "LOGIN_AND_STORE",
+        payload: { token: loginResult.data.token },
+      });
+      navigation.navigate(Constants.MAIN_VIEW);
+    } catch (error) {
+      alert(error);
+    }
   };
 
   //LOGIN CON GOOGLE
@@ -87,11 +84,11 @@ export default function LoginScreen({ navigation }) {
       </View>
       <TouchableOpacity
         style={styles.loginBtn}
-        onPress={() => login(email, password)}
+        onPress={() => userLogin(email, password)}
       >
         <Text style={styles.loginText}>LOGIN</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.signBtn} onPress={() => login()}>
+      <TouchableOpacity style={styles.signBtn} onPress={() => userLogin()}>
         <Text style={styles.loginText}>SIGNUP</Text>
       </TouchableOpacity>
 
