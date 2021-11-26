@@ -1,22 +1,29 @@
 import React from "react";
 import Constants from "../../lib/Constants";
-import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import petNavigator from "../pet/PetNavigator.js";
 import Diary from "../diary/Diary.js";
 import Calendar from "../calendar/Calendar.js";
 import Reminders from "../reminders/Reminders.js";
 
-const MaterialTab = createMaterialBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 
 export default function Main() {
   return (
-    <MaterialTab.Navigator
+    <Tab.Navigator
       activeColor="#f0edf6"
       inactiveColor="#3e2465"
       barStyle={{ backgroundColor: "#694fad" }}
+      screenOptions={{
+        headerShown: false,
+        tabBarActiveBackgroundColor: "#4f618c",
+        tabBarInactiveBackgroundColor: "#465881",
+        tabBarActiveTintColor: "#fb5b5a",
+        tabBarInactiveTintColor: "#f2e9e9",
+      }}
     >
-      <MaterialTab.Screen
+      <Tab.Screen
         name={Constants.PETS_NAVIGATOR}
         component={petNavigator}
         options={{
@@ -26,7 +33,7 @@ export default function Main() {
           ),
         }}
       />
-      <MaterialTab.Screen
+      <Tab.Screen
         name={Constants.DIARY_VIEW}
         component={Diary}
         options={{
@@ -36,7 +43,7 @@ export default function Main() {
           ),
         }}
       />
-      <MaterialTab.Screen
+      <Tab.Screen
         name={Constants.CALENDAR_VIEW}
         component={Calendar}
         options={{
@@ -46,7 +53,7 @@ export default function Main() {
           ),
         }}
       />
-      <MaterialTab.Screen
+      <Tab.Screen
         name={Constants.REMINDERS_VIEW}
         component={Reminders}
         options={{
@@ -56,6 +63,6 @@ export default function Main() {
           ),
         }}
       />
-    </MaterialTab.Navigator>
+    </Tab.Navigator>
   );
 }
