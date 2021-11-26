@@ -11,7 +11,7 @@ export const registerUser = async () => {
   });
 };
 
-export const addPet = async (user) => {
+export const login = async (user) => {
   let endpoint = userUrl + '/login'
   return setRequestHeaders().then((headers) => {
     return axios.post(endpoint, user, headers);

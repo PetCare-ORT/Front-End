@@ -24,8 +24,8 @@ export const editReminder = async (reminderId, updateData) => {
 };
 
 export const deleteReminder = async (reminderId) => {
-  let deleteReminderDndpoint = reminderUrl+ `/${reminderId}`;
+  let deleteReminderEndpoint = reminderUrl+ `/${reminderId}`;
   return getRequestHeaders().then((headers) => {
-    return axios.delete(deleteReminderDndpoint, headers);
+    return axios.delete(deleteReminderEndpoint, headers);
   });
 };
