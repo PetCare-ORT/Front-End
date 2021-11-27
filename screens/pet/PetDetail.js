@@ -40,7 +40,7 @@ export default function petDetail({ navigation, route }) {
           {"\n"}
         </Text>
         <Text>
-          Birth Date: {pet.birthDate}
+          Birth Date: {new Date(pet.birthDate).toLocaleDateString()}
           {"\n"}
         </Text>
         <Text>Gender {pet.gender}</Text>
@@ -61,7 +61,7 @@ export default function petDetail({ navigation, route }) {
       <TouchableOpacity
         style={styles.editButton}
         onPress={() => {
-          alert("edit");
+          navigation.navigate(Constants.PET_FORM_VIEW, { pet: pet });
         }}
       >
         <MaterialCommunityIcons

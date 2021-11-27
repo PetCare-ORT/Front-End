@@ -7,11 +7,11 @@ export default function PetThumbnail(props) {
   return (
     <View>
       <TouchableOpacity
-        onPress={() =>
+        onPress={() => {
           props.navigation.navigate(Constants.PET_DETAIL_VIEW, {
             pet: props.petData,
-          })
-        }
+          });
+        }}
         style={styles.button}
       >
         <MaterialCommunityIcons name="dog" color={"#767676"} size={30} />
