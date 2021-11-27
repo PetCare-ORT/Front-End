@@ -8,7 +8,6 @@ import {
 } from "react-native";
 import Constants from "../../lib/Constants.js";
 import GlobalContext from "../../context";
-import RequestOptions from "../../lib/RequestOptions.js";
 import { login } from "../../services/usersApi.js";
 
 // LOGIN CON GOOGLE
@@ -88,7 +87,12 @@ export default function LoginScreen({ navigation }) {
       >
         <Text style={styles.loginText}>LOGIN</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.signBtn} onPress={() => userLogin()}>
+      <TouchableOpacity
+        style={styles.signBtn}
+        onPress={() =>
+          navigation.navigate(Constants.USER_FORM_VIEW, { user: null })
+        }
+      >
         <Text style={styles.loginText}>SIGNUP</Text>
       </TouchableOpacity>
 

@@ -39,7 +39,10 @@ export default function DropdownMenu({ props }) {
           optionsContainerStyle={{ marginTop: 40 }}
           customStyles={{ optionWrapper: { padding: 5 } }}
         >
-          <MenuOption text="Account" onSelect={() => alert("Profile!")} />
+          <MenuOption
+            text="Account"
+            onSelect={() => navigation.navigate(Constants.PROFILE_VIEW)}
+          />
           <MenuOption onSelect={() => logout()}>
             <Text style={{ color: "red" }}>Logout</Text>
           </MenuOption>

@@ -1,8 +1,9 @@
-import { saveToken, removeToken } from "./utils/tokenStorage";
+import { saveToken, removeToken, getUserFromToken } from "./utils/tokenStorage";
 
 export const Datos = {
   token: "",
   loggedIn: false,
+  userData: {},
   pets: [],
   diaryEntries: [],
   calendarEntries: [],
@@ -17,12 +18,23 @@ export const reducer = (state, action) => {
         ...state,
         token: action.payload.token,
         loggedIn: true,
+        userData: getUserFromToken(action.payload.token),
       };
     case "LOGIN":
       return {
         ...state,
         token: action.payload.token,
         loggedIn: true,
+        userData: getUserFromToken(action.payload.token),
+      };
+    case "UPDATE_USER":
+      return {
+        ...state,
+        userData: {
+          ...state.userData,
+          username: action.payload.username,
+          photoUrl: action.payload.photoUrl,
+        },
       };
     case "LOGOUT":
       removeToken();
