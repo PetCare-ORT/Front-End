@@ -21,7 +21,6 @@ export const getStoredToken = async () => {
 export const getUserFromToken = (token) => {
   if (!token) return null;
   const decoded = jwt_decode(token);
-  console.log(decoded);
   return {
     _id: decoded._id,
     email: decoded.email,

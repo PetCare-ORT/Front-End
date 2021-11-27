@@ -5,7 +5,6 @@ import Constants from "../lib/Constants";
 const userUrl = Constants.HOST + Constants.USER_ENDPOINT;
 
 export const registerUser = async (user) => {
-  console.log(user);
   let endpoint = userUrl + "/register";
   return axios.post(endpoint, user);
 };

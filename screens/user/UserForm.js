@@ -36,7 +36,6 @@ export default function UserForm({ navigation, route }) {
 
   const onSubmitCreate = async (user) => {
     try {
-      console.log(user);
       await registerUser(user).then(() => {
         alert("User was sucessfully created");
         navigation.navigate(Constants.LOGIN_VIEW);
