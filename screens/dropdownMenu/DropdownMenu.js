@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { Avatar, HStack, Center, NativeBaseProvider } from "native-base";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { Avatar, NativeBaseProvider } from "native-base";
 import Constants from "../../lib/Constants";
 import Menu, {
   MenuTrigger,
@@ -11,9 +10,7 @@ import Menu, {
 import { useNavigation } from "@react-navigation/native";
 import GlobalContext from "../../context";
 
-//onSelect={(value) => alert(`Selected number: ${value}`)}
-
-export default function DropdownMenu({ props }) {
+export default function DropdownMenu() {
   const { state, dispatch } = useContext(GlobalContext);
   const navigation = useNavigation();
 
@@ -47,12 +44,9 @@ export default function DropdownMenu({ props }) {
           customStyles={{ optionWrapper: { padding: 5 } }}
         >
           <MenuOption
-            text="Account"
+            text="Profile"
             onSelect={() => navigation.navigate(Constants.PROFILE_VIEW)}
           />
-          <MenuOption onSelect={() => logout()}>
-            <Text style={{ color: "red" }}>Logout</Text>
-          </MenuOption>
         </MenuOptions>
       </Menu>
     </View>
