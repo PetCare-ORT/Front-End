@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { Avatar, HStack, Center, NativeBaseProvider } from "native-base";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Constants from "../../lib/Constants";
 import Menu, {
@@ -29,11 +30,17 @@ export default function DropdownMenu({ props }) {
     <View style={styles.container}>
       <Menu>
         <MenuTrigger>
-          <MaterialCommunityIcons
-            name="account-circle"
-            color={"#767676"}
-            size={26}
-          />
+          <NativeBaseProvider>
+            <Avatar
+              bg="green.500"
+              size="sm"
+              source={{
+                uri: state.userData.photoUrl,
+              }}
+            >
+              SS
+            </Avatar>
+          </NativeBaseProvider>
         </MenuTrigger>
         <MenuOptions
           optionsContainerStyle={{ marginTop: 40 }}
