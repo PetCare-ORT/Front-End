@@ -14,7 +14,7 @@ import { addPet, editPet } from "../../services/petsApi";
 import { SpeciesPicker, GenderPicker } from "../../utils/pickers.js";
 import { DatePicker } from "../../utils/datePicker.js";
 
-export default function CreatePet({ navigation, route }) {
+export default function PetForm({ navigation, route }) {
   const {
     handleSubmit,
     control,

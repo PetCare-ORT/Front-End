@@ -59,7 +59,7 @@ export default function Pets({ navigation, route }) {
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          navigation.navigate(Constants.PET_CREATION_VIEW, { pet: null });
+          navigation.navigate(Constants.PET_FORM_VIEW, { pet: null });
         }}
       >
         <MaterialCommunityIcons

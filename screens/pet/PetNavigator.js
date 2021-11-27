@@ -4,7 +4,7 @@ import { Text } from "react-native";
 import Constants from "../../lib/Constants.js";
 import Pets from "./Pets.js";
 import petDetail from "./PetDetail.js";
-import createPet from "./CreatePet.js";
+import petForm from "./PetForm.js";
 import DropdownMenu from "../dropdownMenu/DropdownMenu.js";
 
 const Stack = createNativeStackNavigator();
@@ -29,8 +29,8 @@ export default function petNavigator() {
         }}
       />
       <Stack.Screen
-        name={Constants.PET_CREATION_VIEW}
-        component={createPet}
+        name={Constants.PET_FORM_VIEW}
+        component={petForm}
         options={{
           headerRight: () => <DropdownMenu />,
         }}
