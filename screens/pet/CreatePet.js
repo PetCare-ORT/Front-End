@@ -10,35 +10,57 @@ import {
 } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import Constants from "../../lib/Constants.js";
-import { addPet } from "../../services/petsApi";
+import { addPet, editPet } from "../../services/petsApi";
 import { SpeciesPicker, GenderPicker } from "../../utils/pickers.js";
 import { DatePicker } from "../../utils/datePicker.js";
 
-export default function CreatePet({ navigation }) {
+export default function CreatePet({ navigation, route }) {
   const {
-    register,
-    setValue,
     handleSubmit,
     control,
-    reset,
     formState: { errors },
   } = useForm({
-    defaultValues: {
-      name: "",
-      species: "",
-      race: "",
-      birthDate: "",
-      gender: "",
-    },
+    defaultValues:
+      route.params.pet !== null
+        ? {
+            name: route.params.pet.name,
+            species: route.params.pet.species,
+            race: route.params.pet.race,
+            birthDate: new Date(route.params.pet.birthDate).toLocaleDateString(
+              "en-US"
+            ),
+            gender: route.params.pet.gender,
+          }
+        : {
+            name: "",
+            species: "",
+            race: "",
+            birthDate: new Date().toLocaleDateString("en-US"),
+            gender: "",
+          },
   });
-  const onSubmit = async (pet) => {
+  const onSubmitCreate = async (pet) => {
     try {
+      pet.birthDate = Date.parse(pet.birthDate);
       await addPet(pet).then(() => {
         alert("Pet added successfully!");
         navigation.navigate(Constants.PETS_VIEW, { reload: true });
       });
     } catch (error) {
-      alert("Error: " + error);
+      alert(error);
+    }
+  };
+
+  const onSubmitEdit = async (pet) => {
+    try {
+      const petId = route.params.pet._id;
+      pet.birthDate = Date.parse(pet.birthDate);
+      await editPet(petId, pet).then(() => {
+        alert(`${pet.name} was successfully updated!`);
+        navigation.navigate(Constants.PETS_VIEW, { reload: true });
+      });
+    } catch (error) {
+      alert(error);
     }
   };
 
@@ -63,8 +85,12 @@ export default function CreatePet({ navigation }) {
         <Text style={styles.label}>Species</Text>
         <Controller
           control={control}
-          render={({ field: { onChange } }) => (
-            <SpeciesPicker onChange={onChange} style={styles.input} />
+          render={({ field: { onChange, value } }) => (
+            <SpeciesPicker
+              onChange={onChange}
+              style={styles.input}
+              defaultValue={value}
+            />
           )}
           name="species"
           rules={{ required: true }}
@@ -95,7 +121,7 @@ export default function CreatePet({ navigation }) {
                 value={value}
               />
             ) : (
-              <DatePicker formOnChange={onChange} />
+              <DatePicker formOnChange={onChange} defaultValue={value} />
             )
           }
           name="birthDate"
@@ -105,8 +131,12 @@ export default function CreatePet({ navigation }) {
         <Text style={styles.label}>Gender</Text>
         <Controller
           control={control}
-          render={({ field: { onChange } }) => (
-            <GenderPicker onChange={onChange} style={styles.input} />
+          render={({ field: { onChange, value } }) => (
+            <GenderPicker
+              onChange={onChange}
+              style={styles.input}
+              defaultValue={value}
+            />
           )}
           name="gender"
           rules={{ required: true }}
@@ -116,8 +146,12 @@ export default function CreatePet({ navigation }) {
           <Button
             style={styles.buttonInner}
             color
-            title="Create"
-            onPress={handleSubmit(onSubmit)}
+            title={route.params.pet !== null ? "Edit" : "Create"}
+            onPress={
+              route.params.pet !== null
+                ? handleSubmit(onSubmitEdit)
+                : handleSubmit(onSubmitCreate)
+            }
           />
         </View>
       </ScrollView>

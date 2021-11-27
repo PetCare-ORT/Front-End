@@ -1,11 +1,12 @@
 import RNPickerSelect from "react-native-picker-select";
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-export const SpeciesPicker = ({ onChange, style }) => {
+export const SpeciesPicker = ({ onChange, style, defaultValue }) => {
   return (
     <View>
       <RNPickerSelect
+        value={defaultValue}
         onValueChange={(value) => onChange(value)}
         items={[
           { label: "Dog", value: "Dog" },
@@ -19,9 +20,10 @@ export const SpeciesPicker = ({ onChange, style }) => {
   );
 };
 
-export const GenderPicker = ({ onChange, style }) => {
+export const GenderPicker = ({ onChange, style, defaultValue }) => {
   return (
     <RNPickerSelect
+      value={defaultValue}
       onValueChange={(value) => onChange(value)}
       items={[
         { label: "Male", value: "Male" },

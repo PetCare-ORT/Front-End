@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { View, Button, TouchableOpacity, Text, StyleSheet } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
-export const DatePicker = ({ formOnChange }) => {
-  const [date, setDate] = useState(new Date());
+export const DatePicker = ({ formOnChange, defaultValue }) => {
+  const [date, setDate] = useState(new Date(defaultValue));
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
 
