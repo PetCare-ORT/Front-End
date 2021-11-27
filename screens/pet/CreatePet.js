@@ -1,8 +1,18 @@
 import React from "react";
-import { View, Text, StyleSheet, Button, TextInput } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  TextInput,
+  ScrollView,
+  Platform,
+} from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import Constants from "../../lib/Constants.js";
 import { addPet } from "../../services/petsApi";
+import { SpeciesPicker, GenderPicker } from "../../utils/pickers.js";
+import { DatePicker } from "../../utils/datePicker.js";
 
 export default function CreatePet({ navigation }) {
   const {
@@ -34,87 +44,83 @@ export default function CreatePet({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>Name</Text>
-      <Controller
-        control={control}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
-            style={styles.input}
-            onBlur={onBlur}
-            onChangeText={(value) => onChange(value)}
-            value={value}
-          />
-        )}
-        name="name"
-        rules={{ required: true }}
-      />
-      <Text style={styles.label}>Species</Text>
-      <Controller
-        control={control}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
-            style={styles.input}
-            onBlur={onBlur}
-            onChangeText={(value) => onChange(value)}
-            value={value}
-          />
-        )}
-        name="species"
-        rules={{ required: true }}
-      />
-
-      <Text style={styles.label}>Race</Text>
-      <Controller
-        control={control}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
-            style={styles.input}
-            onBlur={onBlur}
-            onChangeText={(value) => onChange(value)}
-            value={value}
-          />
-        )}
-        name="race"
-        rules={{ required: true }}
-      />
-      <Text style={styles.label}>Date of birth</Text>
-      <Controller
-        control={control}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
-            style={styles.input}
-            onBlur={onBlur}
-            onChangeText={(value) => onChange(value)}
-            value={value}
-          />
-        )}
-        name="birthDate"
-        rules={{ required: true }}
-      />
-
-      <Text style={styles.label}>Gender</Text>
-      <Controller
-        control={control}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
-            style={styles.input}
-            onBlur={onBlur}
-            onChangeText={(value) => onChange(value)}
-            value={value}
-          />
-        )}
-        name="gender"
-        rules={{ required: true }}
-      />
-
-      <View style={styles.button}>
-        <Button
-          style={styles.buttonInner}
-          color
-          title="Create"
-          onPress={handleSubmit(onSubmit)}
+      <ScrollView>
+        <Text style={styles.label}>Name</Text>
+        <Controller
+          control={control}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              style={styles.input}
+              onBlur={onBlur}
+              onChangeText={(value) => onChange(value)}
+              value={value}
+            />
+          )}
+          name="name"
+          rules={{ required: true }}
         />
-      </View>
+
+        <Text style={styles.label}>Species</Text>
+        <Controller
+          control={control}
+          render={({ field: { onChange } }) => (
+            <SpeciesPicker onChange={onChange} style={styles.input} />
+          )}
+          name="species"
+          rules={{ required: true }}
+        />
+        <Text style={styles.label}>Race</Text>
+        <Controller
+          control={control}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              style={styles.input}
+              onBlur={onBlur}
+              onChangeText={(value) => onChange(value)}
+              value={value}
+            />
+          )}
+          name="race"
+          rules={{ required: true }}
+        />
+        <Text style={styles.label}>Date of birth</Text>
+        <Controller
+          control={control}
+          render={({ field: { onChange, onBlur, value } }) =>
+            Platform.OS === "web" ? (
+              <TextInput
+                style={styles.input}
+                onBlur={onBlur}
+                onChangeText={(value) => onChange(value)}
+                value={value}
+              />
+            ) : (
+              <DatePicker formOnChange={onChange} />
+            )
+          }
+          name="birthDate"
+          rules={{ required: true }}
+        />
+
+        <Text style={styles.label}>Gender</Text>
+        <Controller
+          control={control}
+          render={({ field: { onChange } }) => (
+            <GenderPicker onChange={onChange} style={styles.input} />
+          )}
+          name="gender"
+          rules={{ required: true }}
+        />
+
+        <View style={styles.button}>
+          <Button
+            style={styles.buttonInner}
+            color
+            title="Create"
+            onPress={handleSubmit(onSubmit)}
+          />
+        </View>
+      </ScrollView>
     </View>
   );
 }
