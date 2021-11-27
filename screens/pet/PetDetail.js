@@ -1,5 +1,13 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Alert,
+  Platform,
+} from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Constants from "../../lib/Constants.js";
 import { deletePet } from "../../services/petsApi.js";
@@ -49,7 +57,23 @@ export default function petDetail({ navigation, route }) {
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          petDelete();
+          Platform.OS === "web"
+            ? confirm(Constants.ACTION_CANNOT_BE_REVERSED)
+            : Alert.alert(
+                Constants.DELETE_CONFIRM(pet.name),
+                Constants.ACTION_CANNOT_BE_REVERSED,
+                [
+                  {
+                    text: "Cancel",
+                    onPress: () => null,
+                  },
+                  {
+                    text: "Confirm",
+                    onPress: () => petDelete(),
+                  },
+                ]
+              );
+          return true;
         }}
       >
         <MaterialCommunityIcons
