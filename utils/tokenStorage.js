@@ -18,12 +18,13 @@ export const getStoredToken = async () => {
   });
 };
 
-export const getUserFromToken = (token = getStoredToken()) => {
+export const getUserFromToken = (token) => {
   if (!token) return null;
   const decoded = jwt_decode(token);
   return {
     _id: decoded._id,
     email: decoded.email,
     username: decoded.username,
+    photoUrl: decoded.photoUrl,
   };
 };

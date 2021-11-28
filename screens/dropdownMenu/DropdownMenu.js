@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { Avatar, NativeBaseProvider } from "native-base";
 import Constants from "../../lib/Constants";
 import Menu, {
   MenuTrigger,
@@ -10,9 +10,7 @@ import Menu, {
 import { useNavigation } from "@react-navigation/native";
 import GlobalContext from "../../context";
 
-//onSelect={(value) => alert(`Selected number: ${value}`)}
-
-export default function DropdownMenu({ props }) {
+export default function DropdownMenu() {
   const { state, dispatch } = useContext(GlobalContext);
   const navigation = useNavigation();
 
@@ -29,20 +27,26 @@ export default function DropdownMenu({ props }) {
     <View style={styles.container}>
       <Menu>
         <MenuTrigger>
-          <MaterialCommunityIcons
-            name="account-circle"
-            color={"#767676"}
-            size={26}
-          />
+          <NativeBaseProvider>
+            <Avatar
+              bg="green.500"
+              size="sm"
+              source={{
+                uri: state.userData.photoUrl,
+              }}
+            >
+              SS
+            </Avatar>
+          </NativeBaseProvider>
         </MenuTrigger>
         <MenuOptions
           optionsContainerStyle={{ marginTop: 40 }}
           customStyles={{ optionWrapper: { padding: 5 } }}
         >
-          <MenuOption text="Account" onSelect={() => alert("Profile!")} />
-          <MenuOption onSelect={() => logout()}>
-            <Text style={{ color: "red" }}>Logout</Text>
-          </MenuOption>
+          <MenuOption
+            text="Profile"
+            onSelect={() => navigation.navigate(Constants.PROFILE_VIEW)}
+          />
         </MenuOptions>
       </Menu>
     </View>
