@@ -7,12 +7,14 @@ import {
   TextInput,
   ScrollView,
   Platform,
+  Image,
 } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import Constants from "../../lib/Constants.js";
 import { addPet, editPet } from "../../services/petsApi";
 import { SpeciesPicker, GenderPicker } from "../../utils/pickers.js";
 import { DatePicker } from "../../utils/datePicker.js";
+import { openImagePickerAsync } from "../../utils/imagePicker.js";
 
 export default function PetForm({ navigation, route }) {
   const {
@@ -30,6 +32,7 @@ export default function PetForm({ navigation, route }) {
               "en-US"
             ),
             gender: route.params.pet.gender,
+            photoUri: route.params.pet.photoUri,
           }
         : {
             name: "",
@@ -37,6 +40,7 @@ export default function PetForm({ navigation, route }) {
             race: "",
             birthDate: new Date().toLocaleDateString("en-US"),
             gender: "",
+            photoUri: Constants.GENERIC_PETS,
           },
   });
   const onSubmitCreate = async (pet) => {
@@ -141,7 +145,28 @@ export default function PetForm({ navigation, route }) {
           name="gender"
           rules={{ required: true }}
         />
-
+        <Text style={styles.label}>Photo</Text>
+        <Controller
+          control={control}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <View>
+              <Button
+                title="Choose Photo..."
+                onPress={() => {
+                  openImagePickerAsync().then((image) => onChange(image));
+                }}
+              />
+              <Image
+                source={{
+                  uri: value,
+                }}
+                style={styles.photo}
+              />
+            </View>
+          )}
+          name="photoUri"
+          rules={{ required: false }}
+        />
         <View style={styles.button}>
           <Button
             style={styles.buttonInner}
@@ -165,7 +190,7 @@ const styles = StyleSheet.create({
     marginLeft: 0,
   },
   button: {
-    marginTop: 40,
+    marginTop: 5,
     color: "black",
     height: 40,
     backgroundColor: "#ec5990",
@@ -184,5 +209,10 @@ const styles = StyleSheet.create({
     height: 40,
     padding: 10,
     borderRadius: 4,
+  },
+  photo: {
+    height: 200,
+    resizeMode: "center",
+    margin: 5,
   },
 });
