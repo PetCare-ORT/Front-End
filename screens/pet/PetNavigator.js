@@ -19,6 +19,12 @@ export default function petNavigator() {
         options={{
           headerLeft: () => <Text></Text>,
           headerRight: () => <DropdownMenu />,
+          headerStyle: {
+            backgroundColor: "#465881",
+          },
+          headerTitleStyle: {
+            color: "#f2e9e9",
+          },
         }}
       />
       <Stack.Screen

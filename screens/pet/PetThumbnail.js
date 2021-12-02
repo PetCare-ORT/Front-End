@@ -1,5 +1,11 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Platform,
+} from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Constants from "../../lib/Constants.js";
 
@@ -14,20 +20,25 @@ export default function PetThumbnail(props) {
         }}
         style={styles.button}
       >
-        <MaterialCommunityIcons name="dog" color={"#767676"} size={30} />
-        <Text>{props.petData.name}</Text>
+        <MaterialCommunityIcons name="dog" color={"#f2e9e9"} size={30} />
+        <Text style={{ color: "#f2e9e9", fontWeight: "bold" }}>
+          {props.petData.name}
+        </Text>
       </TouchableOpacity>
     </View>
   );
 }
 const styles = StyleSheet.create({
   button: {
+    flex: 0.5,
     alignItems: "center",
-    backgroundColor: "#77c8ed",
-    marginTop: 10,
-    marginBottom: 10,
-    marginRight: 10,
-    marginLeft: 10,
-    padding: 50,
+    justifyContent: "center",
+    backgroundColor: "#fb5b5a",
+    marginHorizontal: 5,
+    marginVertical: 5,
+    borderRadius: 20,
+    minWidth: Platform.OS === "web" ? "45vw" : "45%",
+    minHeight: "95%",
+    elevation: 3,
   },
 });

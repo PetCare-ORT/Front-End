@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
 import {
   View,
-  Text,
   StyleSheet,
   FlatList,
   TouchableOpacity,
+  Platform,
 } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 import PetThumbnail from "./PetThumbnail.js";
@@ -43,29 +43,31 @@ export default function Pets({ navigation, route }) {
 
   return (
     <View style={styles.container}>
-      <Text>Pets</Text>
       {isLoading ? (
-        <ActivityIndicator />
+        <ActivityIndicator size="large" color="#fb5b5a" />
       ) : (
         <FlatList
+          columnWrapperStyle={styles.columnWrapper}
           data={data}
           numColumns={2}
-          keyExtractor={(item, index) => "key" + index}
+          contentContainerStyle={styles.petList}
+          keyExtractor={(item) => item._id}
           renderItem={({ item }) => (
             <PetThumbnail petData={item} navigation={navigation} />
           )}
         />
       )}
       <TouchableOpacity
-        style={styles.button}
+        style={styles.addButton}
         onPress={() => {
           navigation.navigate(Constants.PET_FORM_VIEW, { pet: null });
         }}
       >
         <MaterialCommunityIcons
           name="plus-circle"
-          color={"#767676"}
+          color={"#fb5b5a"}
           size={60}
+          style={{ elevation: 3 }}
         />
       </TouchableOpacity>
     </View>
@@ -75,11 +77,17 @@ export default function Pets({ navigation, route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
+    backgroundColor: "#f2e9e9",
+    alignItems: "stretch",
     justifyContent: "center",
+    elevation: 1,
   },
-  button: {
+  columnWrapper: {
+    justifyContent: "space-evenly",
+    height: 200,
+    width: "100%",
+  },
+  addButton: {
     flex: 1,
     flexDirection: "row",
     position: "absolute",
@@ -87,5 +95,6 @@ const styles = StyleSheet.create({
     alignSelf: "flex-end",
     justifyContent: "space-between",
     backgroundColor: "transparent",
+    elevation: 3,
   },
 });
