@@ -49,7 +49,6 @@ export default function UserForm({ navigation, route }) {
   const onSubmitEdit = async (user) => {
     try {
       const userId = route.params.user._id;
-      console.log("USERID: " + userId);
       await updateUser(userId, user).then(() => {
         toast.show("Profile successfully updated");
         dispatch({
