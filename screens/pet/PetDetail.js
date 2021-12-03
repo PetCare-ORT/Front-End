@@ -2,7 +2,6 @@ import React from "react";
 import {
   View,
   Text,
-  StyleSheet,
   Image,
   TouchableOpacity,
   Alert,
@@ -10,16 +9,17 @@ import {
 } from "react-native";
 import Constants from "../../lib/Constants.js";
 import { deletePet } from "../../services/petsApi.js";
-
+import { useToast } from "react-native-toast-notifications";
 import Styles from "../../lib/Styles.js";
 
 export default function petDetail({ navigation, route }) {
   const { pet } = route.params;
+  const toast = useToast();
 
   const petDelete = async () => {
     try {
       await deletePet(pet._id).then(() => {
-        alert("Pet deleted successfully!");
+        toast.show("Pet deleted successfully!");
         navigation.navigate(Constants.PETS_VIEW, { reload: true });
       });
     } catch (error) {

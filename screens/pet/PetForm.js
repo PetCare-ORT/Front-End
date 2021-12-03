@@ -15,8 +15,11 @@ import { SpeciesPicker, GenderPicker } from "../../utils/pickers.js";
 import { DatePicker } from "../../utils/datePicker.js";
 import { openImagePickerAsync } from "../../utils/imagePicker.js";
 import Styles from "../../lib/Styles.js";
+import { useToast } from "react-native-toast-notifications";
 
 export default function PetForm({ navigation, route }) {
+  const toast = useToast();
+
   const {
     handleSubmit,
     control,
@@ -47,7 +50,7 @@ export default function PetForm({ navigation, route }) {
     try {
       pet.birthDate = Date.parse(pet.birthDate);
       await addPet(pet).then(() => {
-        alert("Pet added successfully!");
+        toast.show("Pet added successfully!");
         navigation.navigate(Constants.PETS_VIEW, { reload: true });
       });
     } catch (error) {
@@ -60,7 +63,7 @@ export default function PetForm({ navigation, route }) {
       const petId = route.params.pet._id;
       pet.birthDate = Date.parse(pet.birthDate);
       await editPet(petId, pet).then(() => {
-        alert(`${pet.name} was successfully updated!`);
+        toast.show(`${pet.name} was successfully updated!`);
         navigation.navigate(Constants.PETS_VIEW, { reload: true });
       });
     } catch (error) {

@@ -11,9 +11,11 @@ import Constants from "../../lib/Constants.js";
 import { registerUser, updateUser } from "../../services/usersApi.js";
 import GlobalContext from "../../context";
 import Styles from "../../lib/Styles.js";
+import { useToast } from "react-native-toast-notifications";
 
 export default function UserForm({ navigation, route }) {
   const { state, dispatch } = useContext(GlobalContext);
+  const toast = useToast();
 
   const {
     handleSubmit,
@@ -36,7 +38,7 @@ export default function UserForm({ navigation, route }) {
   const onSubmitCreate = async (user) => {
     try {
       await registerUser(user).then(() => {
-        alert("User was sucessfully created");
+        toast.show("User was sucessfully created");
         navigation.navigate(Constants.LOGIN_VIEW);
       });
     } catch (error) {
@@ -49,7 +51,7 @@ export default function UserForm({ navigation, route }) {
       const userId = route.params.user._id;
       console.log("USERID: " + userId);
       await updateUser(userId, user).then(() => {
-        alert("Profile successfully updated");
+        toast.show("Profile successfully updated");
         dispatch({
           type: "UPDATE_USER",
           payload: { username: user.username, photoUrl: user.photoUrl },
