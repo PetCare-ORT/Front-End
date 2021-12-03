@@ -14,15 +14,6 @@ export default function DropdownMenu() {
   const { state, dispatch } = useContext(GlobalContext);
   const navigation = useNavigation();
 
-  function logout() {
-    try {
-      dispatch({ type: "LOGOUT" });
-      navigation.navigate(Constants.LOGIN_VIEW);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   return (
     <View style={styles.container}>
       <Menu>

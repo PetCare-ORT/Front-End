@@ -73,6 +73,7 @@ export default function App() {
                 headerTitleStyle: {
                   color: Colors.PRIMARY_WHITE,
                 },
+                headerTintColor: Colors.PRIMARY_WHITE,
               }}
             />
             <Stack.Screen
@@ -85,6 +86,7 @@ export default function App() {
                 headerTitleStyle: {
                   color: Colors.PRIMARY_WHITE,
                 },
+                headerTintColor: Colors.PRIMARY_WHITE,
               }}
             />
           </Stack.Navigator>

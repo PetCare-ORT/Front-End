@@ -4,8 +4,6 @@ import Constants from "../../lib/Constants";
 import { useNavigation } from "@react-navigation/native";
 import GlobalContext from "../../context";
 
-//onSelect={(value) => alert(`Selected number: ${value}`)}
-
 export default function LogOutButton() {
   const { state, dispatch } = useContext(GlobalContext);
   const navigation = useNavigation();

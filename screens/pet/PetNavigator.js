@@ -19,6 +19,7 @@ export default function petNavigator() {
         initialParams={{ reload: true }}
         options={{
           title: "Pets",
+          headerBackVisible: false,
           headerLeft: () => <Text></Text>,
           headerRight: () => <DropdownMenu />,
           headerStyle: {
@@ -34,6 +35,7 @@ export default function petNavigator() {
         component={petDetail}
         options={{
           title: "Details",
+          headerBackVisible: true,
           headerRight: () => <DropdownMenu />,
           headerStyle: {
             backgroundColor: Colors.PRIMARY_BLUE,
@@ -41,6 +43,7 @@ export default function petNavigator() {
           headerTitleStyle: {
             color: Colors.PRIMARY_WHITE,
           },
+          headerTintColor: Colors.PRIMARY_WHITE,
         }}
       />
       <Stack.Screen
@@ -48,6 +51,7 @@ export default function petNavigator() {
         component={petForm}
         options={{
           title: "Pets",
+          headerBackVisible: true,
           headerRight: () => <DropdownMenu />,
           headerStyle: {
             backgroundColor: Colors.PRIMARY_BLUE,
@@ -55,6 +59,7 @@ export default function petNavigator() {
           headerTitleStyle: {
             color: Colors.PRIMARY_WHITE,
           },
+          headerTintColor: Colors.PRIMARY_WHITE,
         }}
       />
     </Stack.Navigator>
