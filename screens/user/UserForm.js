@@ -2,16 +2,15 @@ import React, { useContext } from "react";
 import {
   View,
   Text,
-  StyleSheet,
-  Button,
+  TouchableOpacity,
   TextInput,
   ScrollView,
-  Platform,
 } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import Constants from "../../lib/Constants.js";
 import { registerUser, updateUser } from "../../services/usersApi.js";
 import GlobalContext from "../../context";
+import Styles from "../../lib/Styles.js";
 
 export default function UserForm({ navigation, route }) {
   const { state, dispatch } = useContext(GlobalContext);
@@ -63,14 +62,14 @@ export default function UserForm({ navigation, route }) {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={Styles.formContainer}>
       <ScrollView>
-        <Text style={styles.label}>Username</Text>
+        <Text style={Styles.formLabel}>Username</Text>
         <Controller
           control={control}
           render={({ field: { onChange, onBlur, value } }) => (
             <TextInput
-              style={styles.input}
+              style={Styles.formInput}
               onBlur={onBlur}
               onChangeText={(value) => onChange(value)}
               value={value}
@@ -81,12 +80,12 @@ export default function UserForm({ navigation, route }) {
         />
         {route.params.user !== null ? (
           <View>
-            <Text style={styles.label}>Photo Url</Text>
+            <Text style={Styles.formLabel}>Photo Url</Text>
             <Controller
               control={control}
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput
-                  style={styles.input}
+                  style={Styles.formInput}
                   onBlur={onBlur}
                   onChangeText={(value) => onChange(value)}
                   value={value}
@@ -98,13 +97,13 @@ export default function UserForm({ navigation, route }) {
           </View>
         ) : (
           <View>
-            <Text style={styles.label}>Email</Text>
+            <Text style={Styles.formLabel}>Email</Text>
             <Controller
               control={control}
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput
                   keyboardType="email-address"
-                  style={styles.input}
+                  style={Styles.formInput}
                   onBlur={onBlur}
                   onChangeText={(value) => onChange(value)}
                   value={value}
@@ -114,13 +113,13 @@ export default function UserForm({ navigation, route }) {
               rules={{ required: false }}
             />
 
-            <Text style={styles.label}>Password</Text>
+            <Text style={Styles.formLabel}>Password</Text>
             <Controller
               control={control}
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput
                   secureTextEntry={true}
-                  style={styles.input}
+                  style={Styles.formInput}
                   onBlur={onBlur}
                   onChangeText={(value) => onChange(value)}
                   value={value}
@@ -131,10 +130,21 @@ export default function UserForm({ navigation, route }) {
             />
           </View>
         )}
-        <View style={styles.button}>
+        <TouchableOpacity
+          style={Styles.userFormButton}
+          onPress={() => {
+            route.params.user !== null
+              ? handleSubmit(onSubmitEdit)()
+              : handleSubmit(onSubmitCreate)();
+          }}
+        >
+          <Text style={Styles.fromButtonText}>
+            {route.params.user !== null ? "UPDATE" : "REGISTER"}
+          </Text>
+        </TouchableOpacity>
+        {/* <View style={{ marginTop: 40 }}>
           <Button
-            style={styles.buttonInner}
-            color
+            color={Colors.PRIMARY_PINK}
             title={route.params.user !== null ? "Update" : "Register"}
             onPress={
               route.params.user !== null
@@ -142,36 +152,8 @@ export default function UserForm({ navigation, route }) {
                 : handleSubmit(onSubmitCreate)
             }
           />
-        </View>
+        </View> */}
       </ScrollView>
     </View>
   );
 }
-const styles = StyleSheet.create({
-  label: {
-    color: "black",
-    margin: 20,
-    marginLeft: 0,
-  },
-  button: {
-    marginTop: 40,
-    color: "black",
-    height: 40,
-    backgroundColor: "#ec5990",
-    borderRadius: 4,
-  },
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    paddingTop: 5,
-    padding: 8,
-    backgroundColor: "#ffffff",
-  },
-  input: {
-    backgroundColor: "#ffe3a1",
-    borderColor: "transparent",
-    height: 40,
-    padding: 10,
-    borderRadius: 4,
-  },
-});

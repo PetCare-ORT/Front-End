@@ -2,12 +2,11 @@ import React from "react";
 import {
   View,
   Text,
-  StyleSheet,
-  Button,
   TextInput,
   ScrollView,
   Platform,
   Image,
+  TouchableOpacity,
 } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import Constants from "../../lib/Constants.js";
@@ -16,7 +15,6 @@ import { SpeciesPicker, GenderPicker } from "../../utils/pickers.js";
 import { DatePicker } from "../../utils/datePicker.js";
 import { openImagePickerAsync } from "../../utils/imagePicker.js";
 import Styles from "../../lib/Styles.js";
-import Colors from "../../lib/Colors.js";
 
 export default function PetForm({ navigation, route }) {
   const {
@@ -72,7 +70,7 @@ export default function PetForm({ navigation, route }) {
 
   return (
     <View style={Styles.formContainer}>
-      <ScrollView>
+      <ScrollView style={{ height: 2000 }}>
         <Text style={Styles.formLabel}>Name</Text>
         <Controller
           control={control}
@@ -152,50 +150,38 @@ export default function PetForm({ navigation, route }) {
           control={control}
           render={({ field: { onChange, onBlur, value } }) => (
             <View>
-              <Button
-                color={Colors.PRIMARY_PINK}
-                title="Choose Photo..."
+              <TouchableOpacity
+                style={Styles.formButton}
                 onPress={() => {
                   openImagePickerAsync().then((image) => onChange(image));
                 }}
-              />
+              >
+                <Text style={Styles.fromButtonText}>CHOOSE PHOTO...</Text>
+              </TouchableOpacity>
               <Image
                 source={{
                   uri: value,
                 }}
-                style={styles.photo}
+                style={Styles.formPhoto}
               />
             </View>
           )}
           name="photoUri"
           rules={{ required: false }}
         />
-        <View>
-          <Button
-            color={Colors.PRIMARY_PINK}
-            title={route.params.pet !== null ? "Edit" : "Create"}
-            onPress={
-              route.params.pet !== null
-                ? handleSubmit(onSubmitEdit)
-                : handleSubmit(onSubmitCreate)
-            }
-          />
-        </View>
+        <TouchableOpacity
+          style={Styles.formButton}
+          onPress={() => {
+            route.params.pet !== null
+              ? handleSubmit(onSubmitEdit)()
+              : handleSubmit(onSubmitCreate)();
+          }}
+        >
+          <Text style={Styles.fromButtonText}>
+            {route.params.pet !== null ? "UPDATE" : "CREATE"}
+          </Text>
+        </TouchableOpacity>
       </ScrollView>
     </View>
   );
 }
-const styles = StyleSheet.create({
-  button: {
-    marginTop: 5,
-    color: "black",
-    height: 40,
-    backgroundColor: "#ec5990",
-    borderRadius: 4,
-  },
-  photo: {
-    height: 200,
-    resizeMode: "center",
-    margin: 5,
-  },
-});
