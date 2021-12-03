@@ -12,6 +12,8 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import Constants from "../../lib/Constants.js";
 import { deletePet } from "../../services/petsApi.js";
 import Icons from "../../lib/Icons.js";
+import Colors from "../../lib/Colors.js";
+import Styles from "../../lib/Styles.js";
 
 export default function petDetail({ navigation, route }) {
   const { pet } = route.params;
@@ -51,85 +53,48 @@ export default function petDetail({ navigation, route }) {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={Styles.petListContainer}>
       <Image
         source={{
           uri: pet.photoUri ? pet.photoUri : Constants.GENERIC_PETS,
         }}
-        style={styles.photo}
+        style={Styles.petDetailPhoto}
       />
-      <Text style={styles.title}>
+      <Text style={Styles.petDetailTextContainer}>
         <Text>
           Name: {pet.name}
           {"\n"}
-        </Text>
-        <Text>
           Species: {pet.species}
           {"\n"}
-        </Text>
-        <Text>
           Race: {pet.race}
           {"\n"}
-        </Text>
-        <Text>
           Birth Date: {new Date(pet.birthDate).toLocaleDateString()}
           {"\n"}
+          Gender: {pet.gender}
         </Text>
-        <Text>Gender {pet.gender}</Text>
       </Text>
-
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          Platform.OS === "web" ? deleteWeb() : deleteMobile();
-        }}
-      >
-        <MaterialCommunityIcons
-          name={Icons.DELETE_BUTTON}
-          color={"#d11515"}
-          size={60}
-        />
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.editButton}
-        onPress={() => {
-          navigation.navigate(Constants.PET_FORM_VIEW, { pet: pet });
-        }}
-      >
-        <MaterialCommunityIcons
-          name={Icons.EDIT_BUTTON}
-          color={"#d11515"}
-          size={60}
-        />
-      </TouchableOpacity>
+      <View style={Styles.petDetailButtonsContainer}>
+        <TouchableOpacity
+          style={Styles.petDetailEditButton}
+          onPress={() => {
+            navigation.navigate(Constants.PET_FORM_VIEW, { pet: pet });
+          }}
+        >
+          <Text style={Styles.petDetailButtonText}>EDIT</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={Styles.petDetailDeleteButton}
+          onPress={() => {
+            Platform.OS === "web" ? deleteWeb() : deleteMobile();
+          }}
+        >
+          <Text style={Styles.petDetailButtonText}>DELETE</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 24,
-    backgroundColor: "#eaeaea",
-  },
-  title: {
-    flex: 3,
-    marginTop: 16,
-    paddingVertical: 8,
-    borderWidth: 4,
-    borderColor: "#20232a",
-    borderRadius: 6,
-    backgroundColor: "#61dafb",
-    color: "#20232a",
-    textAlign: "center",
-    fontSize: 30,
-    fontWeight: "bold",
-  },
-  photo: {
-    flex: 2,
-    height: 200,
-    resizeMode: "center",
-    margin: 5,
-  },
   button: {
     flex: 1,
     flexDirection: "row",
