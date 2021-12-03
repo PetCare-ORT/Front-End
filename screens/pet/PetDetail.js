@@ -8,11 +8,9 @@ import {
   Alert,
   Platform,
 } from "react-native";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Constants from "../../lib/Constants.js";
 import { deletePet } from "../../services/petsApi.js";
-import Icons from "../../lib/Icons.js";
-import Colors from "../../lib/Colors.js";
+
 import Styles from "../../lib/Styles.js";
 
 export default function petDetail({ navigation, route }) {
@@ -53,12 +51,12 @@ export default function petDetail({ navigation, route }) {
   }
 
   return (
-    <View style={Styles.petListContainer}>
+    <View style={Styles.detailContainer}>
       <Image
         source={{
           uri: pet.photoUri ? pet.photoUri : Constants.GENERIC_PETS,
         }}
-        style={Styles.petDetailPhoto}
+        style={Styles.detailPhoto}
       />
       <Text style={Styles.petDetailTextContainer}>
         <Text>
@@ -73,14 +71,14 @@ export default function petDetail({ navigation, route }) {
           Gender: {pet.gender}
         </Text>
       </Text>
-      <View style={Styles.petDetailButtonsContainer}>
+      <View style={Styles.detailButtonsContainer}>
         <TouchableOpacity
           style={Styles.petDetailEditButton}
           onPress={() => {
             navigation.navigate(Constants.PET_FORM_VIEW, { pet: pet });
           }}
         >
-          <Text style={Styles.petDetailButtonText}>EDIT</Text>
+          <Text style={Styles.detailButtonsText}>EDIT</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={Styles.petDetailDeleteButton}
@@ -88,31 +86,9 @@ export default function petDetail({ navigation, route }) {
             Platform.OS === "web" ? deleteWeb() : deleteMobile();
           }}
         >
-          <Text style={Styles.petDetailButtonText}>DELETE</Text>
+          <Text style={Styles.detailButtonsText}>DELETE</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 }
-const styles = StyleSheet.create({
-  button: {
-    flex: 1,
-    flexDirection: "row",
-    position: "absolute",
-    top: 10,
-    right: 5,
-    alignSelf: "flex-end",
-    justifyContent: "space-between",
-    backgroundColor: "transparent",
-  },
-  editButton: {
-    flex: 1,
-    flexDirection: "row",
-    position: "absolute",
-    top: 80,
-    right: 5,
-    alignSelf: "flex-end",
-    justifyContent: "space-between",
-    backgroundColor: "transparent",
-  },
-});
