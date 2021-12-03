@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { View, Button, TouchableOpacity, Text, StyleSheet } from "react-native";
+import { View, TouchableOpacity, Text } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import Styles from "../lib/Styles";
 
 export const DatePicker = ({ formOnChange, defaultValue }) => {
   const [date, setDate] = useState(new Date(defaultValue));
@@ -26,8 +27,11 @@ export const DatePicker = ({ formOnChange, defaultValue }) => {
   return (
     <View>
       <View>
-        <TouchableOpacity onPress={() => showDatepicker()} style={styles.input}>
-          <Text>{date.toLocaleDateString()}</Text>
+        <TouchableOpacity
+          onPress={() => showDatepicker()}
+          style={Styles.formInput}
+        >
+          <Text style={{ color: "#F2E9E9" }}>{date.toLocaleDateString()}</Text>
         </TouchableOpacity>
       </View>
       {show && (
@@ -43,13 +47,3 @@ export const DatePicker = ({ formOnChange, defaultValue }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  input: {
-    backgroundColor: "#ffe3a1",
-    borderColor: "transparent",
-    height: 40,
-    padding: 10,
-    borderRadius: 4,
-  },
-});

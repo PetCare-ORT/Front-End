@@ -6,21 +6,20 @@ import petNavigator from "../pet/PetNavigator.js";
 import Diary from "../diary/Diary.js";
 import Calendar from "../calendar/Calendar.js";
 import Reminders from "../reminders/Reminders.js";
+import Colors from "../../lib/Colors";
+import Icons from "../../lib/Icons";
 
 const Tab = createBottomTabNavigator();
 
 export default function Main() {
   return (
     <Tab.Navigator
-      activeColor="#f0edf6"
-      inactiveColor="#3e2465"
-      barStyle={{ backgroundColor: "#694fad" }}
       screenOptions={{
         headerShown: false,
-        tabBarActiveBackgroundColor: "#4f618c",
-        tabBarInactiveBackgroundColor: "#465881",
-        tabBarActiveTintColor: "#fb5b5a",
-        tabBarInactiveTintColor: "#f2e9e9",
+        tabBarActiveBackgroundColor: Colors.SECONDARY_BLUE,
+        tabBarInactiveBackgroundColor: Colors.PRIMARY_BLUE,
+        tabBarActiveTintColor: Colors.PRIMARY_PINK,
+        tabBarInactiveTintColor: Colors.PRIMARY_WHITE,
       }}
     >
       <Tab.Screen
@@ -29,7 +28,11 @@ export default function Main() {
         options={{
           tabBarLabel: "Pets",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="paw" color={color} size={26} />
+            <MaterialCommunityIcons
+              name={Icons.PET_SCREEN}
+              color={color}
+              size={26}
+            />
           ),
         }}
       />
@@ -39,7 +42,11 @@ export default function Main() {
         options={{
           tabBarLabel: "Diary",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="notebook" color={color} size={26} />
+            <MaterialCommunityIcons
+              name={Icons.DIARY_SCREEN}
+              color={color}
+              size={26}
+            />
           ),
         }}
       />
@@ -49,7 +56,11 @@ export default function Main() {
         options={{
           tabBarLabel: "Calendar",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="calendar" color={color} size={26} />
+            <MaterialCommunityIcons
+              name={Icons.CALENDAR_SCREEN}
+              color={color}
+              size={26}
+            />
           ),
         }}
       />
@@ -59,7 +70,11 @@ export default function Main() {
         options={{
           tabBarLabel: "Reminders",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="alarm" color={color} size={26} />
+            <MaterialCommunityIcons
+              name={Icons.REMINDERS_SCREEN}
+              color={color}
+              size={26}
+            />
           ),
         }}
       />

@@ -1,6 +1,7 @@
 import RNPickerSelect from "react-native-picker-select";
-import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React from "react";
+import { View } from "react-native";
+import Constants from "../lib/Constants";
 
 export const SpeciesPicker = ({ onChange, style, defaultValue }) => {
   return (
@@ -9,9 +10,13 @@ export const SpeciesPicker = ({ onChange, style, defaultValue }) => {
         value={defaultValue}
         onValueChange={(value) => onChange(value)}
         items={[
-          { label: "Dog", value: "Dog" },
-          { label: "Cat", value: "Cat" },
-          { label: "Lizard", value: "Lizard" },
+          { label: Constants.DOG, value: Constants.DOG },
+          { label: Constants.CAT, value: Constants.CAT },
+          { label: Constants.HAMSTER, value: Constants.HAMSTER },
+          { label: Constants.TORTOISE, value: Constants.TORTOISE },
+          { label: Constants.HORSE, value: Constants.HORSE },
+          { label: Constants.FISH, value: Constants.FISH },
+          { label: Constants.RABBIT, value: Constants.RABBIT },
         ]}
         style={{ inputAndroid: { color: "black", ...style } }}
         useNativeAndroidPickerStyle={false}

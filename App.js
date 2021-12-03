@@ -53,6 +53,7 @@ export default function App() {
               component={ProfileScreen}
               options={{
                 headerRight: () => <LogOutButton />,
+                title: state.userData.username,
               }}
             />
             <Stack.Screen

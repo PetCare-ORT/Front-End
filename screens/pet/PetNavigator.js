@@ -6,6 +6,7 @@ import Pets from "./Pets.js";
 import petDetail from "./PetDetail.js";
 import petForm from "./PetForm.js";
 import DropdownMenu from "../dropdownMenu/DropdownMenu.js";
+import Colors from "../../lib/Colors.js";
 
 const Stack = createNativeStackNavigator();
 
@@ -17,13 +18,14 @@ export default function petNavigator() {
         component={Pets}
         initialParams={{ reload: true }}
         options={{
+          title: "Pets",
           headerLeft: () => <Text></Text>,
           headerRight: () => <DropdownMenu />,
           headerStyle: {
-            backgroundColor: "#465881",
+            backgroundColor: Colors.PRIMARY_BLUE,
           },
           headerTitleStyle: {
-            color: "#f2e9e9",
+            color: Colors.PRIMARY_WHITE,
           },
         }}
       />
@@ -31,14 +33,28 @@ export default function petNavigator() {
         name={Constants.PET_DETAIL_VIEW}
         component={petDetail}
         options={{
+          title: "Details",
           headerRight: () => <DropdownMenu />,
+          headerStyle: {
+            backgroundColor: Colors.PRIMARY_BLUE,
+          },
+          headerTitleStyle: {
+            color: Colors.PRIMARY_WHITE,
+          },
         }}
       />
       <Stack.Screen
         name={Constants.PET_FORM_VIEW}
         component={petForm}
         options={{
+          title: "Pets",
           headerRight: () => <DropdownMenu />,
+          headerStyle: {
+            backgroundColor: Colors.PRIMARY_BLUE,
+          },
+          headerTitleStyle: {
+            color: Colors.PRIMARY_WHITE,
+          },
         }}
       />
     </Stack.Navigator>

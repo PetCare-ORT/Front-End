@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import GlobalContext from "../../context";
 import Constants from "../../lib/Constants.js";
+import Icons from "../../lib/Icons";
 
 export default function Profile({ navigation }) {
   const { state, dispatch } = useContext(GlobalContext);
@@ -31,7 +32,7 @@ export default function Profile({ navigation }) {
         }}
       >
         <MaterialCommunityIcons
-          name="circle-edit-outline"
+          name={Icons.PROFILE_EDIT}
           color={"#d11515"}
           size={60}
         />

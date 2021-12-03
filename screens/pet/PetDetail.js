@@ -11,6 +11,7 @@ import {
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Constants from "../../lib/Constants.js";
 import { deletePet } from "../../services/petsApi.js";
+import Icons from "../../lib/Icons.js";
 
 export default function petDetail({ navigation, route }) {
   const { pet } = route.params;
@@ -84,7 +85,7 @@ export default function petDetail({ navigation, route }) {
         }}
       >
         <MaterialCommunityIcons
-          name="delete-circle"
+          name={Icons.DELETE_BUTTON}
           color={"#d11515"}
           size={60}
         />
@@ -96,7 +97,7 @@ export default function petDetail({ navigation, route }) {
         }}
       >
         <MaterialCommunityIcons
-          name="circle-edit-outline"
+          name={Icons.EDIT_BUTTON}
           color={"#d11515"}
           size={60}
         />

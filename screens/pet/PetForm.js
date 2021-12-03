@@ -15,6 +15,8 @@ import { addPet, editPet } from "../../services/petsApi";
 import { SpeciesPicker, GenderPicker } from "../../utils/pickers.js";
 import { DatePicker } from "../../utils/datePicker.js";
 import { openImagePickerAsync } from "../../utils/imagePicker.js";
+import Styles from "../../lib/Styles.js";
+import Colors from "../../lib/Colors.js";
 
 export default function PetForm({ navigation, route }) {
   const {
@@ -69,14 +71,14 @@ export default function PetForm({ navigation, route }) {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={Styles.formContainer}>
       <ScrollView>
-        <Text style={styles.label}>Name</Text>
+        <Text style={Styles.formLabel}>Name</Text>
         <Controller
           control={control}
           render={({ field: { onChange, onBlur, value } }) => (
             <TextInput
-              style={styles.input}
+              style={Styles.formInput}
               onBlur={onBlur}
               onChangeText={(value) => onChange(value)}
               value={value}
@@ -86,25 +88,25 @@ export default function PetForm({ navigation, route }) {
           rules={{ required: true }}
         />
 
-        <Text style={styles.label}>Species</Text>
+        <Text style={Styles.formLabel}>Species</Text>
         <Controller
           control={control}
           render={({ field: { onChange, value } }) => (
             <SpeciesPicker
               onChange={onChange}
-              style={styles.input}
+              style={Styles.formInput}
               defaultValue={value}
             />
           )}
           name="species"
           rules={{ required: true }}
         />
-        <Text style={styles.label}>Race</Text>
+        <Text style={Styles.formLabel}>Race</Text>
         <Controller
           control={control}
           render={({ field: { onChange, onBlur, value } }) => (
             <TextInput
-              style={styles.input}
+              style={Styles.formInput}
               onBlur={onBlur}
               onChangeText={(value) => onChange(value)}
               value={value}
@@ -113,13 +115,13 @@ export default function PetForm({ navigation, route }) {
           name="race"
           rules={{ required: true }}
         />
-        <Text style={styles.label}>Date of birth</Text>
+        <Text style={Styles.formLabel}>Date of birth</Text>
         <Controller
           control={control}
           render={({ field: { onChange, onBlur, value } }) =>
             Platform.OS === "web" ? (
               <TextInput
-                style={styles.input}
+                style={Styles.formInput}
                 onBlur={onBlur}
                 onChangeText={(value) => onChange(value)}
                 value={value}
@@ -132,25 +134,26 @@ export default function PetForm({ navigation, route }) {
           rules={{ required: true }}
         />
 
-        <Text style={styles.label}>Gender</Text>
+        <Text style={Styles.formLabel}>Gender</Text>
         <Controller
           control={control}
           render={({ field: { onChange, value } }) => (
             <GenderPicker
               onChange={onChange}
-              style={styles.input}
+              style={Styles.formInput}
               defaultValue={value}
             />
           )}
           name="gender"
           rules={{ required: true }}
         />
-        <Text style={styles.label}>Photo</Text>
+        <Text style={Styles.formLabel}>Photo</Text>
         <Controller
           control={control}
           render={({ field: { onChange, onBlur, value } }) => (
             <View>
               <Button
+                color={Colors.PRIMARY_PINK}
                 title="Choose Photo..."
                 onPress={() => {
                   openImagePickerAsync().then((image) => onChange(image));
@@ -167,10 +170,9 @@ export default function PetForm({ navigation, route }) {
           name="photoUri"
           rules={{ required: false }}
         />
-        <View style={styles.button}>
+        <View>
           <Button
-            style={styles.buttonInner}
-            color
+            color={Colors.PRIMARY_PINK}
             title={route.params.pet !== null ? "Edit" : "Create"}
             onPress={
               route.params.pet !== null
@@ -184,30 +186,11 @@ export default function PetForm({ navigation, route }) {
   );
 }
 const styles = StyleSheet.create({
-  label: {
-    color: "black",
-    margin: 20,
-    marginLeft: 0,
-  },
   button: {
     marginTop: 5,
     color: "black",
     height: 40,
     backgroundColor: "#ec5990",
-    borderRadius: 4,
-  },
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    paddingTop: 5,
-    padding: 8,
-    backgroundColor: "#ffffff",
-  },
-  input: {
-    backgroundColor: "#ffe3a1",
-    borderColor: "transparent",
-    height: 40,
-    padding: 10,
     borderRadius: 4,
   },
   photo: {
