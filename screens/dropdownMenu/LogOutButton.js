@@ -3,8 +3,7 @@ import { View, Button, Alert, Platform } from "react-native";
 import Constants from "../../lib/Constants";
 import { useNavigation } from "@react-navigation/native";
 import GlobalContext from "../../context";
-
-//onSelect={(value) => alert(`Selected number: ${value}`)}
+import Colors from "../../lib/Colors";
 
 export default function LogOutButton() {
   const { state, dispatch } = useContext(GlobalContext);
@@ -45,7 +44,7 @@ export default function LogOutButton() {
           Platform.OS === "web" ? logoutWeb() : logoutMobile();
         }}
         title="Logout"
-        color="#eb4034"
+        color={Colors.RED_WARNING}
       />
     </View>
   );

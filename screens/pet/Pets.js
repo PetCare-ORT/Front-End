@@ -1,17 +1,13 @@
 import React, { useEffect, useState, useContext } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  FlatList,
-  TouchableOpacity,
-} from "react-native";
+import { View, FlatList, TouchableOpacity } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 import PetThumbnail from "./PetThumbnail.js";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Constants from "../../lib/Constants.js";
 import GlobalContext from "../../context";
 import { getUserPets } from "../../services/petsApi.js";
+import Styles from "../../lib/Styles.js";
+import Colors from "../../lib/Colors.js";
 
 export default function Pets({ navigation, route }) {
   const { state, dispatch } = useContext(GlobalContext);
@@ -42,50 +38,32 @@ export default function Pets({ navigation, route }) {
   }, [route.params.reload]);
 
   return (
-    <View style={styles.container}>
-      <Text>Pets</Text>
+    <View style={Styles.petListContainer}>
       {isLoading ? (
-        <ActivityIndicator />
+        <ActivityIndicator size="large" color={Colors.PRIMARY_PINK} />
       ) : (
         <FlatList
+          columnWrapperStyle={Styles.petListColumnWrapper}
           data={data}
           numColumns={2}
-          keyExtractor={(item, index) => "key" + index}
+          keyExtractor={(item) => item._id}
           renderItem={({ item }) => (
             <PetThumbnail petData={item} navigation={navigation} />
           )}
         />
       )}
       <TouchableOpacity
-        style={styles.button}
+        style={Styles.petListAddButton}
         onPress={() => {
           navigation.navigate(Constants.PET_FORM_VIEW, { pet: null });
         }}
       >
         <MaterialCommunityIcons
           name="plus-circle"
-          color={"#767676"}
+          color={Colors.PRIMARY_BLUE}
           size={60}
         />
       </TouchableOpacity>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  button: {
-    flex: 1,
-    flexDirection: "row",
-    position: "absolute",
-    bottom: 10,
-    alignSelf: "flex-end",
-    justifyContent: "space-between",
-    backgroundColor: "transparent",
-  },
-});

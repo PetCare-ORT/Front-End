@@ -9,22 +9,15 @@ import Menu, {
 } from "react-native-popup-menu";
 import { useNavigation } from "@react-navigation/native";
 import GlobalContext from "../../context";
+import Colors from "../../lib/Colors.js";
+import Styles from "../../lib/Styles.js";
 
 export default function DropdownMenu() {
   const { state, dispatch } = useContext(GlobalContext);
   const navigation = useNavigation();
 
-  function logout() {
-    try {
-      dispatch({ type: "LOGOUT" });
-      navigation.navigate(Constants.LOGIN_VIEW);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   return (
-    <View style={styles.container}>
+    <View style={Styles.dropDownContainer}>
       <Menu>
         <MenuTrigger>
           <NativeBaseProvider>
@@ -40,8 +33,10 @@ export default function DropdownMenu() {
           </NativeBaseProvider>
         </MenuTrigger>
         <MenuOptions
-          optionsContainerStyle={{ marginTop: 40 }}
-          customStyles={{ optionWrapper: { padding: 5 } }}
+          optionsContainerStyle={{
+            marginTop: 35,
+          }}
+          customStyles={optionsStyles}
         >
           <MenuOption
             text="Profile"
@@ -59,3 +54,17 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
 });
+
+const optionsStyles = {
+  optionsContainer: {
+    backgroundColor: Colors.BLACK,
+    padding: 1,
+  },
+  optionWrapper: {
+    backgroundColor: Colors.PRIMARY_BLUE,
+    padding: 10,
+  },
+  optionText: {
+    color: Colors.PRIMARY_WHITE,
+  },
+};
