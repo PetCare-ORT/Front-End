@@ -2,7 +2,7 @@ import axios from "axios";
 import { getRequestHeaders } from "./helpers/requestHeaders";
 import Constants from "../lib/Constants";
 
-const calendarEntryUrl = Constants.HOST + Constants.CALENDAR_ENDPOINT
+const calendarEntryUrl = Constants.HOST + Constants.CALENDAR_ENDPOINT;
 
 export const getUserCalendarEntries = async () => {
   return getRequestHeaders().then((headers) => {
@@ -10,21 +10,21 @@ export const getUserCalendarEntries = async () => {
   });
 };
 
-export const addCalendarEntries = async (calendarEntries) => {
+export const addCalendarEntry = async (calendarEntry) => {
   return getRequestHeaders().then((headers) => {
-    return axios.post(calendarEntryUrl, appointment, headers);
+    return axios.post(calendarEntryUrl, calendarEntry, headers);
   });
 };
 
-export const editAppointment = async (calendarEntriesId, updateData) => {
-  let endpoint = calendarEntryUrl + `/${calendarEntriesId}`;
+export const editCalendarEntry = async (calendarEntryId, updateData) => {
+  let endpoint = calendarEntryUrl + `/${calendarEntryId}`;
   return getRequestHeaders().then((headers) => {
     return axios.put(endpoint, updateData, headers);
   });
 };
 
-export const deleteAppointment = async (calendarEntriesId) => {
-  let endpoint = calendarEntryUrl + `/${calendarEntriesId}`;
+export const deleteCalendarEntry = async (calendarEntryId) => {
+  let endpoint = calendarEntryUrl + `/${calendarEntryId}`;
   return getRequestHeaders().then((headers) => {
     return axios.delete(endpoint, headers);
   });
