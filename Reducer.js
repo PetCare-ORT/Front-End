@@ -52,6 +52,11 @@ export const reducer = (state, action) => {
       return {
         ...state,
         calendarEntries: action.payload.calendarEntries,
-      }
+      };
+    case "STORE_DIARY_ENTRIES":
+      return {
+        ...state,
+        pets: action.payload.pets,
+      };
   }
 };

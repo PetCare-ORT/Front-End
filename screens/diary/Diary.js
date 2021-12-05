@@ -38,6 +38,7 @@ export default function DiaryEntries({ navigation, route }) {
   // }, [route.params.reload]);
 
   useEffect(() => {
+    console.log(route.params);
     getEntries();
   }, []);
 
@@ -47,9 +48,7 @@ export default function DiaryEntries({ navigation, route }) {
         <ActivityIndicator size="large" color={Colors.PRIMARY_PINK} />
       ) : (
         <FlatList
-          columnWrapperStyle={Styles.petListColumnWrapper}
           data={data}
-          numColumns={1}
           keyExtractor={(item) => item._id}
           renderItem={({ item }) => (
             <DiaryThumbnail diaryData={item} navigation={navigation} />
