@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useContext } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
+import React, { useState, useContext } from "react";
+import { View, Text, TouchableOpacity, Alert, Platform } from "react-native";
 import { Agenda } from "react-native-calendars";
 import { Card } from "react-native-paper";
 import GlobalContext from "../../context";
@@ -38,7 +38,6 @@ export default function CalendarScreen({ navigation, route }) {
   }
 
   function deleteMobile(calendarEntry) {
-    console.log(calendarEntry),
       Alert.alert(
         Constants.DELETE_CONFIRM(calendarEntry.name),
         Constants.ACTION_CANNOT_BE_REVERSED,
@@ -121,7 +120,6 @@ export default function CalendarScreen({ navigation, route }) {
                   color={Colors.PRIMARY_BLUE}
                   size={25}
                   onPress={() => {
-                    console.log(item);
                     navigation.navigate(Constants.CALENDAR_FORM_VIEW, {
                       calendar: item,
                     });

@@ -44,7 +44,6 @@ export default function CalendarForm({ navigation, route }) {
 
   const onSubmitCreate = async (calendarEntry) => {
     try {
-      console.log(calendarEntry);
       await addCalendarEntry(calendarEntry).then(() => {
         toast.show("Calendar Entry added successfully!");
         navigation.navigate(Constants.CALENDAR_VIEW, { reload: true });
@@ -56,8 +55,6 @@ export default function CalendarForm({ navigation, route }) {
 
   const onSubmitEdit = async (calendarEntry) => {
     try {
-      console.log(calendarEntry);
-      console.log(route.params.calendar);
       const calendarEntryId = route.params.calendar._id;
       calendarEntry.date = Date.parse(calendarEntry.date);
       await editCalendarEntry(calendarEntryId, calendarEntry).then(() => {
