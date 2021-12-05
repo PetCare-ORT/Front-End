@@ -3,8 +3,8 @@ import Constants from "../../lib/Constants";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import petNavigator from "../pet/PetNavigator.js";
+import CalendarNavigator from "../calendar/CalendarNavigator";
 import Diary from "../diary/Diary.js";
-import Calendar from "../calendar/Calendar.js";
 import Reminders from "../reminders/Reminders.js";
 import Colors from "../../lib/Colors";
 import Icons from "../../lib/Icons";
@@ -51,8 +51,8 @@ export default function Main() {
         }}
       />
       <Tab.Screen
-        name={Constants.CALENDAR_VIEW}
-        component={Calendar}
+        name={Constants.CALENDAR_NAVIGATOR}
+        component={CalendarNavigator}
         options={{
           tabBarLabel: "Calendar",
           tabBarIcon: ({ color }) => (
