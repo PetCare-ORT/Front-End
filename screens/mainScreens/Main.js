@@ -4,8 +4,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import petNavigator from "../pet/PetNavigator.js";
 import CalendarNavigator from "../calendar/CalendarNavigator";
-import Diary from "../diary/Diary.js";
-import Reminders from "../reminders/Reminders.js";
+import diaryNavigator from "../diary/DiaryNavigator.js";
+import remindersNavigator from "../reminders/ReminderNavigator";
 import Colors from "../../lib/Colors";
 import Icons from "../../lib/Icons";
 
@@ -37,8 +37,8 @@ export default function Main() {
         }}
       />
       <Tab.Screen
-        name={Constants.DIARY_VIEW}
-        component={Diary}
+        name={Constants.DIARY_NAVIGATOR}
+        component={diaryNavigator}
         options={{
           tabBarLabel: "Diary",
           tabBarIcon: ({ color }) => (
@@ -65,8 +65,8 @@ export default function Main() {
         }}
       />
       <Tab.Screen
-        name={Constants.REMINDERS_VIEW}
-        component={Reminders}
+        name={Constants.REMINDERS_NAVIGATOR}
+        component={remindersNavigator}
         options={{
           tabBarLabel: "Reminders",
           tabBarIcon: ({ color }) => (
