@@ -13,13 +13,17 @@ import Constants from "../../lib/Constants.js";
 import {
   addCalendarEntry,
   editCalendarEntry,
+  getUserCalendarEntries,
 } from "../../services/calendarApi";
 import { DatePicker } from "../../utils/datePicker.js";
 import Styles from "../../lib/Styles.js";
 import { useToast } from "react-native-toast-notifications";
+import useCalendarEntries from "../../hooks/useCalendarEntries.js";
 
 export default function CalendarForm({ navigation, route }) {
   const toast = useToast();
+
+  const { getCalendarEntries } = useCalendarEntries();
 
   const {
     handleSubmit,
@@ -48,6 +52,7 @@ export default function CalendarForm({ navigation, route }) {
         toast.show("Calendar Entry added successfully!");
         navigation.navigate(Constants.CALENDAR_VIEW, { reload: true });
       });
+      getCalendarEntries();
     } catch (error) {
       alert(error);
     }
@@ -61,6 +66,7 @@ export default function CalendarForm({ navigation, route }) {
         toast.show(`${calendarEntry.name} was successfully updated!`);
         navigation.navigate(Constants.CALENDAR_VIEW, { reload: true });
       });
+      getCalendarEntries();
     } catch (error) {
       alert(error);
     }

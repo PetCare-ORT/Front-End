@@ -6,7 +6,7 @@ export const Datos = {
   userData: {},
   pets: [],
   diaryEntries: [],
-  calendarEntries: [],
+  calendarEntries: {},
   reminders: [],
 };
 
@@ -52,6 +52,6 @@ export const reducer = (state, action) => {
       return {
         ...state,
         calendarEntries: action.payload.calendarEntries,
-      }
+      };
   }
 };
