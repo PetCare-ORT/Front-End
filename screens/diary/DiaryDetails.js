@@ -10,15 +10,17 @@ import {
 } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Constants from "../../lib/Constants.js";
+import { useToast } from "react-native-toast-notifications";
 import { deleteDiary } from "../../services/diaryApi.js";
 
 export default function diaryDetail({ navigation, route }) {
   const { diary } = route.params;
+  const toast = useToast();
 
   const deleteDiary = async () => {
     try {
       await deleteDiary(diary._id).then(() => {
-        alert("Entry deleted successfully!");
+        toast.show("Entry deleted successfully!");
         navigation.navigate(Constants.DIARY_VIEW, { reload: true });
       });
     } catch (error) {
@@ -70,7 +72,7 @@ export default function diaryDetail({ navigation, route }) {
           Date: {new Date(diary.date).toLocaleDateString()}
           {"\n"}
         </Text>
-        <Text>Attatchment {diary.attatchment}</Text>
+        <Text> {diary.attatchment}</Text>
       </Text>
 
       <TouchableOpacity
@@ -88,7 +90,7 @@ export default function diaryDetail({ navigation, route }) {
       <TouchableOpacity
         style={styles.editButton}
         onPress={() => {
-          navigation.navigate(Constants.PET_FORM_VIEW, { pet: pet });
+          navigation.navigate(Constants.DIARY_FORM_VIEW, { diary: diary });
         }}
       >
         <MaterialCommunityIcons

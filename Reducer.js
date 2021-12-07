@@ -56,7 +56,12 @@ export const reducer = (state, action) => {
     case "STORE_DIARY_ENTRIES":
       return {
         ...state,
-        pets: action.payload.pets,
+        diaryEntries: action.payload.diaryEntries,
+      };
+    case "STORE_REMINDERS":
+      return {
+        ...state,
+        reminders: action.payload.reminders,
       };
   }
 };

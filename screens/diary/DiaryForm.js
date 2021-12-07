@@ -7,10 +7,14 @@ import {
   TextInput,
   ScrollView,
   Platform,
+  Image,
+  TouchableOpacity,
 } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import Constants from "../../lib/Constants.js";
 import { addDiary, editDiary } from "../../services/diaryApi";
+import { openImagePickerAsync } from "../../utils/imagePicker.js";
+import Styles from "../../lib/Styles.js";
 import { DatePicker } from "../../utils/datePicker.js";
 
 export default function DiaryForm({ navigation, route }) {
@@ -115,24 +119,34 @@ export default function DiaryForm({ navigation, route }) {
         <Controller
           control={control}
           render={({ field: { onChange, onBlur, value } }) => (
-            <TextInput
-              style={styles.input}
-              onBlur={onBlur}
-              onChangeText={(value) => onChange(value)}
-              value={value}
-            />
+            <View>
+              <TouchableOpacity
+                style={Styles.formButton}
+                onPress={() => {
+                  openImagePickerAsync().then((image) => onChange(image));
+                }}
+              >
+                <Text style={Styles.fromButtonText}>CHOOSE PHOTO...</Text>
+              </TouchableOpacity>
+              <Image
+                source={{
+                  uri: value,
+                }}
+                style={Styles.formPhoto}
+              />
+            </View>
           )}
-          name="attatchment"
-          rules={{ required: true }}
+          name="photoUri"
+          rules={{ required: false }}
         />
 
         <View style={styles.button}>
           <Button
             style={styles.buttonInner}
             color
-            title={route.params.pet !== null ? "Edit" : "Create"}
+            title={route.params.diary !== null ? "Edit" : "Create"}
             onPress={
-              route.params.pet !== null
+              route.params.diary !== null
                 ? handleSubmit(onSubmitEdit)
                 : handleSubmit(onSubmitCreate)
             }

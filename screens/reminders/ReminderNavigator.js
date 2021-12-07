@@ -2,23 +2,23 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Text } from "react-native";
 import Constants from "../../lib/Constants.js";
-import DiaryEntries from "./Diary.js";
-import diaryDetail from "./DiaryDetails.js";
-import DiaryForm from "./DiaryForm.js";
+import Reminders from "./Reminders.js";
+import reminderDetail from "./ReminderDetail.js";
+import RemindersForm from "./ReminderForm.js";
 import DropdownMenu from "../dropdownMenu/DropdownMenu.js";
 import Colors from "../../lib/Colors.js";
 
 const Stack = createNativeStackNavigator();
 
-export default function diaryNavigator() {
+export default function remindersNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name={Constants.DIARY_VIEW}
-        component={DiaryEntries}
+        name={Constants.REMINDERS_VIEW}
+        component={Reminders}
         initialParams={{ reload: true }}
         options={{
-          title: "Diary Entries",
+          title: "Reminders",
           headerBackVisible: false,
           headerLeft: () => <Text></Text>,
           headerRight: () => <DropdownMenu />,
@@ -31,8 +31,8 @@ export default function diaryNavigator() {
         }}
       />
       <Stack.Screen
-        name={Constants.DIARY_DETAIL_VIEW}
-        component={diaryDetail}
+        name={Constants.REMINDERS_DETAIL_VIEW}
+        component={reminderDetail}
         options={{
           title: "Details",
           headerBackVisible: true,
@@ -47,10 +47,10 @@ export default function diaryNavigator() {
         }}
       />
       <Stack.Screen
-        name={Constants.DIARY_FORM_VIEW}
-        component={DiaryForm}
+        name={Constants.REMINDERS_FORM_VIEW}
+        component={RemindersForm}
         options={{
-          title: "Diary entries",
+          title: "Reminders",
           headerBackVisible: true,
           headerRight: () => <DropdownMenu />,
           headerStyle: {

@@ -21,7 +21,7 @@ export default function DiaryEntries({ navigation, route }) {
       setData(diaryData);
       dispatch({
         type: "STORE_DIARY_ENTRIES",
-        payload: { entries: diaryData },
+        payload: { diary: diaryData },
       });
     } catch (error) {
       console.error(error);
@@ -30,17 +30,12 @@ export default function DiaryEntries({ navigation, route }) {
     }
   };
 
-  // useEffect(() => {
-  //   if (route.params.reload == true) {
-  //     getEntries();
-  //     route.params.reload = undefined;
-  //   }
-  // }, [route.params.reload]);
-
   useEffect(() => {
-    console.log(route.params);
-    getEntries();
-  }, []);
+    if (route.params.reload == true) {
+      getEntries();
+      route.params.reload = undefined;
+    }
+  }, [route.params.reload]);
 
   return (
     <View style={Styles.petListContainer}>
@@ -58,7 +53,7 @@ export default function DiaryEntries({ navigation, route }) {
       <TouchableOpacity
         style={Styles.petListAddButton}
         onPress={() => {
-          navigation.navigate(Constants.PET_FORM_VIEW, { pet: null });
+          navigation.navigate(Constants.DIARY_FORM_VIEW, { diary: null });
         }}
       >
         <MaterialCommunityIcons
