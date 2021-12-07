@@ -7,3 +7,8 @@
 - La app contará con un sistema de navegación para las diferentes secciones.
 - La app permitirá al usuario modificar su perfil (foto).
 - La app contará con diario para guardar momentos especiales de las mascotas.
+
+
+## Bugs
+
+- Calendar: RenderItems wont re render on edition and deletion, only on creation.
