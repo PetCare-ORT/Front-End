@@ -12,3 +12,4 @@
 ## Bugs
 
 - Calendar: RenderItems wont re render on edition and deletion, only on creation.
+- Formularios: No muestran mensajes de error cuando hay campos invalidos
