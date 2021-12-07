@@ -104,7 +104,7 @@ export default function RemindersForm({ navigation, route }) {
           }}
         >
           <Text style={Styles.fromButtonText}>
-            {route.params.pet !== null ? "EDIT" : "CREATE"}
+            {route.params.reminder !== null ? "EDIT" : "CREATE"}
           </Text>
         </TouchableOpacity>
       </ScrollView>
