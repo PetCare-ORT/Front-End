@@ -6,7 +6,7 @@ export const Datos = {
   userData: {},
   pets: [],
   diaryEntries: [],
-  calendarEntries: [],
+  calendarEntries: {},
   reminders: [],
 };
 

@@ -1,31 +1,27 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { View, Text, TouchableOpacity, Alert, Platform } from "react-native";
 import { Agenda } from "react-native-calendars";
 import { Card } from "react-native-paper";
-import GlobalContext from "../../context";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import {
-  getUserCalendarEntries,
-  deleteCalendarEntry,
-} from "../../services/calendarApi.js";
+import { useToast } from "react-native-toast-notifications";
+
+import { deleteCalendarEntry } from "../../services/calendarApi.js";
 import Styles from "../../lib/Styles.js";
 import Colors from "../../lib/Colors.js";
 import Constants from "../../lib/Constants.js";
-import { useToast } from "react-native-toast-notifications";
+import useCalendarEntries from "../../hooks/useCalendarEntries";
 
 export default function CalendarScreen({ navigation, route }) {
-  const { state, dispatch } = useContext(GlobalContext);
-  const [isLoading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
-  const [items, setItems] = useState({});
   const toast = useToast();
+
+  const { getCalendarEntries, entries } = useCalendarEntries();
 
   const calendarDelete = async (calendarEntry) => {
     try {
-      await deleteCalendarEntry(calendarEntry._id).then(() => {
-        toast.show("Calendar Entry deleted successfully!");
-        navigation.navigate(Constants.CALENDAR_VIEW, { reload: true });
-      });
+      await deleteCalendarEntry(calendarEntry._id);
+      toast.show("Calendar Entry deleted successfully!");
+      navigation.navigate(Constants.CALENDAR_VIEW, { reload: true });
+      getCalendarEntries();
     } catch (error) {
       alert(error);
     }
@@ -38,70 +34,41 @@ export default function CalendarScreen({ navigation, route }) {
   }
 
   function deleteMobile(calendarEntry) {
-      Alert.alert(
-        Constants.DELETE_CONFIRM(calendarEntry.name),
-        Constants.ACTION_CANNOT_BE_REVERSED,
-        [
-          {
-            text: "Cancel",
-            onPress: () => null,
-          },
+    Alert.alert(
+      Constants.DELETE_CONFIRM(calendarEntry.name),
+      Constants.ACTION_CANNOT_BE_REVERSED,
+      [
+        {
+          text: "Cancel",
+          onPress: () => null,
+        },
 
-          {
-            text: "Confirm",
+        {
+          text: "Confirm",
 
-            onPress: () => calendarDelete(calendarEntry),
+          onPress: () => {
+            calendarDelete(calendarEntry);
           },
-        ]
-      );
+        },
+      ]
+    );
   }
 
-  const timeToString = (time) => {
-    const date = new Date(time);
-    return date.toISOString().split("T")[0];
-  };
+  const deleteEntry = (item) => {
+    // console.log(item, Platform.OS);
 
-  const getCalendarEntries = async () => {
-    try {
-      const calendarEntries = await getUserCalendarEntries();
-      const calendarData = calendarEntries.data;
-      setData(calendarData);
-      dispatch({
-        type: "STORE_CALENDAR_ENTRIES",
-        payload: { calendarEntries: calendarData },
-      });
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
+    if (Platform.OS === "web") {
+      deleteWeb();
+    } else {
+      deleteMobile(item);
     }
   };
 
-  const loadItems = () => {
-    getCalendarEntries();
-    data.forEach((element) => {
-      let time = new Date(element.date).getTime();
-      let strTime = timeToString(time);
-      if (!items[strTime]) {
-        items[strTime] = [];
-        items[strTime].push({
-          _id: element._id,
-          name: element.name,
-          description: element.description,
-          date: element.date,
-          height: 200,
-        });
-      }
-    });
-
-    const newItems = {};
-    Object.keys(items).forEach((key) => {
-      newItems[key] = items[key];
-    });
-    setItems(newItems);
-  };
-
   const renderItem = (item) => {
+    const deleteThisEntry = () => {
+      console.log("ESTE ITEM", item);
+      deleteEntry(item);
+    };
     return (
       <TouchableOpacity style={{ marginRight: 10, marginTop: 17 }}>
         <Card>
@@ -129,9 +96,7 @@ export default function CalendarScreen({ navigation, route }) {
                   name="delete"
                   color={Colors.PRIMARY_BLUE}
                   size={25}
-                  onPress={() => {
-                    Platform.OS === "web" ? deleteWeb() : deleteMobile(item);
-                  }}
+                  onPress={deleteThisEntry}
                 />
               </TouchableOpacity>
             </View>
@@ -144,8 +109,8 @@ export default function CalendarScreen({ navigation, route }) {
   return (
     <View style={{ flex: 1 }}>
       <Agenda
-        items={items}
-        loadItemsForMonth={loadItems}
+        items={entries}
+        loadItemsForMonth={getCalendarEntries}
         selected={new Date()}
         renderItem={renderItem}
       />
